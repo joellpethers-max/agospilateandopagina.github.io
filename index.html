@@ -24,7 +24,6 @@
       -moz-osx-font-smoothing:grayscale;
     }
 
-    /* Full-screen hero with background image */
     .hero-bg {
       position: fixed;
       inset:0;
@@ -45,7 +44,6 @@
       z-index: -1;
     }
 
-    /* login panel */
     #login-panel {
       backdrop-filter: blur(6px) saturate(120%);
       background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
@@ -53,7 +51,6 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.45);
     }
 
-    /* glowing accent button */
     .btn-accent {
       background: linear-gradient(90deg, var(--accent-3), var(--accent) 60%);
       color: white;
@@ -62,7 +59,6 @@
     }
     .btn-accent:hover { transform: translateY(-3px) scale(1.01); box-shadow: 0 12px 30px rgba(128,0,32,0.35); }
 
-    /* small animated icon */
     .pulse { animation: pulse 1.8s infinite; }
     @keyframes pulse {
       0%{ transform: scale(1); opacity: 0.9; }
@@ -73,12 +69,10 @@
     #main-content { display: none; }
     #main-content.visible { display: block; }
 
-    /* card glass */
     .card {
       background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.88));
     }
 
-    /* responsive tweaks */
     @media (max-width: 640px) {
       .hero-title { font-size: 1.6rem; }
       #login-panel { padding: 1.2rem; }
@@ -87,11 +81,9 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-  <!-- Background layers -->
   <div class="hero-bg" id="hero-bg"></div>
   <div class="bg-overlay"></div>
 
-  <!-- Login / prepage (centered) -->
   <div class="min-h-screen flex items-center justify-center px-4" style="gap:1.5rem;">
     <div id="login-panel" class="rounded-3xl p-10 w-full max-w-3xl flex items-center gap-8 shadow-xl">
       <div class="flex-1 text-white">
@@ -131,7 +123,6 @@
         </p>
       </div>
 
-      <!-- Right: quick preview card -->
       <div class="w-80 hidden md:block">
         <div class="rounded-2xl overflow-hidden shadow-2xl">
           <img src="fondo.jpg" alt="Agos" class="w-full h-40 object-cover" />
@@ -149,7 +140,6 @@
     </div>
   </div>
 
-  <!-- Main content (hidden until login) -->
   <div id="main-content" class="min-h-screen overlay pt-6 pb-12">
     <nav class="flex justify-between items-center px-8 py-4" style="background: linear-gradient(90deg, var(--accent-3), var(--accent)); color: white;">
       <div class="flex items-center gap-4">
@@ -197,7 +187,6 @@
     </footer>
   </div>
 
-  <!-- Firebase + App Logic -->
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js';
     import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js';
@@ -207,7 +196,7 @@
       apiKey: "AIzaSyCnDyqeQj8bMtMbSXLLDe_roz7KPUozQhQ",
       authDomain: "pilateando-c534d.firebaseapp.com",
       projectId: "pilateando-c534d",
-      storageBucket: "pilateando-c534d.appspot.com",
+      storageBucket: "pilateando-c534d.appspot.com", // ✅ corregido aquí
       messagingSenderId: "595737907735",
       appId: "1:595737907735:web:d113392a022aa1ed5b4252",
       measurementId: "G-H2B69H0KP1"
@@ -216,121 +205,3 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     const auth = getAuth(app);
-
-    const demoCourses = [
-      { id: 'curso-inicial', title: 'Pilates Inicial', description: 'Ideal para quienes recién empiezan.', price:'USD 49', quiz: { q:'¿Cuál es el principio básico del Pilates para el centro del cuerpo?', options:['Respiración','Control y concentración','Velocidad'], answer:1 } },
-      { id: 'curso-intermedio', title: 'Pilates Intermedio', description: 'Mayor desafío para tu práctica.', price:'USD 59', quiz: { q:'¿Cuál es un objetivo del Pilates Intermedio?', options:['Fuerza','Estiramiento','Ambos'], answer:2 } }
-    ];
-
-    const demoWorkshops = [
-      { id:'taller-1', title:'Taller Respiración y Relajación', quiz:{q:'¿Qué se busca en la respiración durante el taller?', options:['Relajar','Agitar','Ignorar'], answer:0} },
-      { id:'taller-2', title:'Taller Movilidad y Estiramiento', quiz:{q:'Cuál es la postura clave para estiramiento?', options:['Recta','Encogida','Inclinada'], answer:0} }
-    ];
-
-    const coursesEl = document.getElementById('courses');
-    const workshopsEl = document.getElementById('workshops');
-    const heroBg = document.getElementById('hero-bg');
-    const btnLoginOverlay = document.getElementById('btn-login-overlay');
-    const btnLoginNav = document.getElementById('btn-login');
-    const btnGuest = document.getElementById('btn-guest');
-
-    let points = 0;
-    let badges = [];
-
-    function renderQuiz(quiz, container) {
-      const qEl = document.createElement('div');
-      qEl.innerHTML = `<p class="font-medium mb-2">${quiz.q}</p>`;
-      quiz.options.forEach((opt,i)=>{
-        const btn = document.createElement('button');
-        btn.className = 'block w-full text-left border rounded p-2 my-1';
-        btn.innerText = opt;
-        btn.onclick = ()=>{
-          if(btn.disabled) return;
-          if(i===quiz.answer){ points+=10; badges.push('✅'); btn.style.backgroundColor='#d1fae5'; }
-          else { btn.style.backgroundColor='#fecaca'; }
-          qEl.querySelectorAll('button').forEach(b=>b.disabled=true);
-        };
-        qEl.appendChild(btn);
-      });
-      container.appendChild(qEl);
-    }
-
-    function renderCourses(){
-      coursesEl.innerHTML='';
-      demoCourses.forEach(c=>{
-        const card = document.createElement('div');
-        card.className = 'p-4 bg-white rounded shadow-sm flex flex-col';
-        card.innerHTML = `
-          <h4 class="font-semibold text-[var(--accent-3)]">${c.title}</h4>
-          <p class="text-sm text-gray-500">${c.description}</p>
-          <p class="mt-2 font-semibold text-[var(--accent)]">${c.price}</p>
-        `;
-        const quizContainer = document.createElement('div');
-        quizContainer.className='mt-2';
-        renderQuiz(c.quiz, quizContainer);
-        card.appendChild(quizContainer);
-        coursesEl.appendChild(card);
-      });
-    }
-
-    function renderWorkshops(){
-      workshopsEl.innerHTML='';
-      demoWorkshops.forEach(w=>{
-        const card = document.createElement('div');
-        card.className='p-4 bg-white rounded shadow-sm flex flex-col';
-        card.innerHTML=`<h4 class="font-semibold text-[var(--accent)]">${w.title}</h4>`;
-        const quizContainer = document.createElement('div');
-        quizContainer.className='mt-2';
-        renderQuiz(w.quiz, quizContainer);
-        card.appendChild(quizContainer);
-        workshopsEl.appendChild(card);
-      });
-    }
-
-    function showMainContent(user) {
-      if(user){
-        document.getElementById('main-content').classList.add('visible');
-        document.querySelector('body > div.min-h-screen.flex.items-center.justify-center').style.display = 'none';
-      } else {
-        document.getElementById('main-content').classList.remove('visible');
-        document.querySelector('body > div.min-h-screen.flex.items-center.justify-center').style.display = 'flex';
-      }
-    }
-
-    async function login() {
-      try {
-        if(auth.currentUser){
-          await signOut(auth);
-        } else {
-          await signInWithPopup(auth, new GoogleAuthProvider());
-        }
-      } catch (error) {
-        alert("Error al iniciar sesión: " + error.message);
-        console.error(error);
-      }
-    }
-
-    if (btnLoginOverlay) btnLoginOverlay.addEventListener('click', login);
-    if (btnLoginNav) btnLoginNav.addEventListener('click', login);
-
-    if (btnGuest) {
-      btnGuest.addEventListener('click', ()=>{
-        document.querySelector('body > div.min-h-screen.flex.items-center.justify-center').style.display = 'none';
-        document.getElementById('main-content').classList.add('visible');
-      });
-    }
-
-    onAuthStateChanged(auth,user=>{
-      showMainContent(user);
-      if (btnLoginNav)
-        btnLoginNav.innerText = user ? `Salir (${user.displayName || 'Mi cuenta'})` : 'Entrar / Registrarme';
-    });
-
-    document.addEventListener('DOMContentLoaded', ()=>{
-      renderCourses();
-      renderWorkshops();
-      setTimeout(()=> heroBg.classList.add('animate'), 600);
-    });
-  </script>
-</body>
-</html>
