@@ -24,6 +24,7 @@
       -moz-osx-font-smoothing:grayscale;
     }
 
+    /* Full-screen hero with background image */
     .hero-bg {
       position: fixed;
       inset:0;
@@ -44,6 +45,7 @@
       z-index: -1;
     }
 
+    /* login panel */
     #login-panel {
       backdrop-filter: blur(6px) saturate(120%);
       background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
@@ -51,6 +53,7 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.45);
     }
 
+    /* glowing accent button */
     .btn-accent {
       background: linear-gradient(90deg, var(--accent-3), var(--accent) 60%);
       color: white;
@@ -59,6 +62,7 @@
     }
     .btn-accent:hover { transform: translateY(-3px) scale(1.01); box-shadow: 0 12px 30px rgba(128,0,32,0.35); }
 
+    /* small animated icon */
     .pulse { animation: pulse 1.8s infinite; }
     @keyframes pulse {
       0%{ transform: scale(1); opacity: 0.9; }
@@ -69,10 +73,12 @@
     #main-content { display: none; }
     #main-content.visible { display: block; }
 
+    /* card glass */
     .card {
       background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.88));
     }
 
+    /* responsive tweaks */
     @media (max-width: 640px) {
       .hero-title { font-size: 1.6rem; }
       #login-panel { padding: 1.2rem; }
@@ -81,9 +87,11 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
+  <!-- Background layers -->
   <div class="hero-bg" id="hero-bg"></div>
   <div class="bg-overlay"></div>
 
+  <!-- Login / prepage (centered) -->
   <div class="min-h-screen flex items-center justify-center px-4" style="gap:1.5rem;">
     <div id="login-panel" class="rounded-3xl p-10 w-full max-w-3xl flex items-center gap-8 shadow-xl">
       <div class="flex-1 text-white">
@@ -123,6 +131,7 @@
         </p>
       </div>
 
+      <!-- Right: quick preview card -->
       <div class="w-80 hidden md:block">
         <div class="rounded-2xl overflow-hidden shadow-2xl">
           <img src="fondo.jpg" alt="Agos" class="w-full h-40 object-cover" />
@@ -140,6 +149,7 @@
     </div>
   </div>
 
+  <!-- Main content (hidden until login) -->
   <div id="main-content" class="min-h-screen overlay pt-6 pb-12">
     <nav class="flex justify-between items-center px-8 py-4" style="background: linear-gradient(90deg, var(--accent-3), var(--accent)); color: white;">
       <div class="flex items-center gap-4">
@@ -187,6 +197,7 @@
     </footer>
   </div>
 
+  <!-- Firebase + App Logic -->
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js';
     import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js';
