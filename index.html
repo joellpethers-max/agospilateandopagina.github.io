@@ -9,148 +9,317 @@
     :root{
       --accent: #800020; /* vino */
       --accent-2: #FFB4A2; /* rosa pastel */
-      --accent-3: #708238; /* verde oliva */
+      --accent-3: #556B2F; /* verde oliva fuerte */
+      --glass: rgba(255,255,255,0.08);
     }
+
+    html,body { height:100%; }
+
     body {
-      background: url('fondo.jpg') no-repeat center center fixed;
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: #111;
+      color: #111;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .hero-bg {
+      position: fixed;
+      inset:0;
+      background-image: url("fondo.jpg");
       background-size: cover;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-position: center;
+      z-index: -2;
+      transform: scale(1.02);
+      transition: transform 0.8s ease;
     }
-    .card {
-      backdrop-filter: blur(8px);
-      background-color: rgba(255, 255, 255, 0.8);
-      border-radius: 1rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+
+    .hero-bg.animate { transform: scale(1.06); }
+
+    .bg-overlay {
+      position: fixed;
+      inset:0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.3) 100%);
+      z-index: -1;
     }
-    .btn {
-      background-color: var(--accent);
+
+    #login-panel {
+      backdrop-filter: blur(6px) saturate(120%);
+      background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+    }
+
+    .btn-accent {
+      background: linear-gradient(90deg, var(--accent-3), var(--accent) 60%);
       color: white;
-      border-radius: 0.5rem;
-      padding: 0.5rem 1rem;
-      transition: background-color 0.3s;
+      box-shadow: 0 8px 20px rgba(128,0,32,0.25), 0 0 24px rgba(128,0,32,0.08) inset;
+      transition: transform .18s ease, box-shadow .18s ease;
     }
-    .btn:hover {
-      background-color: var(--accent-2);
-      color: black;
+    .btn-accent:hover { transform: translateY(-3px) scale(1.01); box-shadow: 0 12px 30px rgba(128,0,32,0.35); }
+
+    .pulse { animation: pulse 1.8s infinite; }
+    @keyframes pulse {
+      0%{ transform: scale(1); opacity: 0.9; }
+      50%{ transform: scale(1.06); opacity: 1; }
+      100%{ transform: scale(1); opacity: 0.9; }
     }
-    .input {
-      border: 1px solid var(--accent);
-      border-radius: 0.5rem;
-      padding: 0.5rem;
-      width: 100%;
+
+    #main-content { display: none; }
+    #main-content.visible { display: block; }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.88));
     }
-    .hidden { display: none; }
+
+    @media (max-width: 640px) {
+      .hero-title { font-size: 1.6rem; }
+      #login-panel { padding: 1.2rem; }
+    }
   </style>
 </head>
+<body class="min-h-screen flex flex-col">
 
-<body class="min-h-screen flex flex-col items-center justify-center p-4">
+  <div class="hero-bg" id="hero-bg"></div>
+  <div class="bg-overlay"></div>
 
-  <div id="login" class="card p-6 w-full max-w-sm text-center">
-    <h1 class="text-2xl font-bold mb-4 text-[var(--accent)]">Pilateando con Agos</h1>
-    <p class="mb-4 text-gray-700">Iniciá sesión para continuar</p>
-    <button id="loginBtn" class="btn w-full mb-3">Iniciar sesión con Google</button>
-    <button id="demoBtn" class="btn w-full bg-[var(--accent-3)] hover:bg-[var(--accent-2)]">Entrar en modo demo</button>
+  <div class="min-h-screen flex items-center justify-center px-4" style="gap:1.5rem;">
+    <div id="login-panel" class="rounded-3xl p-10 w-full max-w-3xl flex items-center gap-8 shadow-xl">
+      <div class="flex-1 text-white">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 12c0-5 4-9 9-9s9 4 9 9" stroke="white" stroke-opacity="0.9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M6 16c2-2 5-3 8-3s6 1 8 3" stroke="var(--accent-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-2xl font-extrabold" style="color: white;">Pilateando con Agos</h1>
+            <p class="text-sm text-white/80">Conecta cuerpo, mente y movimiento</p>
+          </div>
+        </div>
+
+        <h2 class="hero-title text-4xl font-bold mb-3" style="color: #fff;">Bienvenido</h2>
+        <p class="text-white/80 mb-6 max-w-md">
+          Accedé a tus cursos y talleres. Iniciá sesión con Google para sincronizar tu progreso y contenidos.
+        </p>
+
+        <div class="flex gap-3 items-center">
+          <button id="btn-login-overlay" class="btn-accent rounded-xl px-6 py-3 font-semibold flex items-center gap-3">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 12.2c0-.7-.1-1.4-.3-2H12v3.8h5.5c-.2 1.1-.9 2.2-1.8 2.9v2.4h2.9c1.7-1.6 2.7-3.9 2.7-6.1z" fill="white"/>
+              <path d="M12 22c2.4 0 4.5-.8 6-2.2l-2.9-2.4c-.8.6-1.8.9-3.1.9-2.4 0-4.4-1.6-5.1-3.8H3.9v2.4C5.4 19.9 8.5 22 12 22z" fill="white"/>
+              <path d="M6.9 13.5A5.8 5.8 0 016.7 12c0-.5.1-1 .2-1.5V8.1H3.9A9.9 9.9 0 003 12c0 1.6.4 3.1 1 4.4l2.9-2.9z" fill="white"/>
+            </svg>
+            Entrar / Registrarse
+          </button>
+
+          <a id="btn-guest" class="px-4 py-2 rounded-lg border border-white/12 text-white/90 hover:bg-white/6 cursor-pointer">Ver demo</a>
+        </div>
+
+        <p class="text-xs text-white/60 mt-4 max-w-sm">
+          Al iniciar sesión aceptás nuestras políticas. (Demo: podés explorar sin cuenta)
+        </p>
+      </div>
+
+      <div class="w-80 hidden md:block">
+        <div class="rounded-2xl overflow-hidden shadow-2xl">
+          <img src="fondo.jpg" alt="Agos" class="w-full h-40 object-cover" />
+          <div class="p-4 bg-white">
+            <h4 class="font-bold text-lg text-[var(--accent)]">Pilates Inicial</h4>
+            <p class="text-sm text-gray-600 mt-1">Clase introductoria para mejorar la postura y respiración.</p>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="text-sm font-semibold text-[var(--accent)]">USD 49</span>
+              <span class="text-xs text-gray-500">2 lecciones</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <div id="main" class="hidden card p-6 w-full max-w-3xl">
-    <h2 class="text-xl font-semibold mb-4 text-[var(--accent)]">Bienvenido a Pilateando</h2>
-    <div id="userInfo" class="mb-4 text-gray-800"></div>
+  <div id="main-content" class="min-h-screen overlay pt-6 pb-12">
+    <nav class="flex justify-between items-center px-8 py-4" style="background: linear-gradient(90deg, var(--accent-3), var(--accent)); color: white;">
+      <div class="flex items-center gap-4">
+        <img src="logo.png" alt="Logo" class="h-10 w-10 object-contain">
+        <h1 class="text-2xl font-bold text-white">Pilateando con Agos</h1>
+      </div>
+      <ul class="flex items-center gap-6">
+        <li><a href="#sobre-mi" class="text-[var(--accent-2)] hover:underline">Sobre mí</a></li>
+        <li><a href="#cursos" class="text-[var(--accent-2)] hover:underline">Cursos</a></li>
+        <li><a href="#talleres" class="text-[var(--accent-2)] hover:underline">Talleres</a></li>
+        <li><button id="btn-login" class="px-3 py-1 border rounded bg-[var(--accent-2)] text-[var(--accent)]">Entrar / Registrarme</button></li>
+      </ul>
+    </nav>
 
-    <h3 class="text-lg font-semibold mb-2">Cursos y Talleres</h3>
-    <div id="courses" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+    <section class="text-center py-20 px-6" style="background: url('fondo.jpg') no-repeat center center/cover;">
+      <h2 class="text-4xl font-extrabold text-[var(--accent-3)] drop-shadow-lg">Bienvenidos a Pilateando con Agos</h2>
+      <p class="mt-4 text-lg text-[var(--accent-2)] max-w-2xl mx-auto">
+        Un espacio creado con amor y dedicación para ayudarte a conectar con tu cuerpo, tu respiración y tu bienestar.
+      </p>
+    </section>
 
-    <button id="logoutBtn" class="btn mt-6 w-full bg-gray-600 hover:bg-gray-400">Cerrar sesión</button>
+    <section id="sobre-mi" class="px-8 py-12 max-w-4xl mx-auto">
+      <div class="p-8 rounded-2xl card shadow-xl">
+        <h3 class="text-3xl font-semibold text-[var(--accent-3)] mb-4">Sobre mí</h3>
+        <p>
+          ¡Hola! Soy Agos, instructora apasionada de pilates y bienestar físico. 
+          Mi misión es ayudarte a mejorar tu postura, flexibilidad y fuerza 
+          mientras cuidamos la mente y el alma.
+        </p>
+      </div>
+    </section>
+
+    <section id="cursos" class="px-8 py-12 max-w-6xl mx-auto">
+      <h3 class="text-3xl font-semibold text-[var(--accent-3)] mb-6">Cursos</h3>
+      <div id="courses" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+    </section>
+
+    <section id="talleres" class="px-8 py-12 max-w-6xl mx-auto">
+      <h3 class="text-3xl font-semibold text-[var(--accent)] mb-6">Talleres</h3>
+      <div id="workshops" class="space-y-4"></div>
+    </section>
+
+    <footer class="text-center py-6 mt-12" style="background: linear-gradient(90deg, var(--accent-3), var(--accent)); color: white;">
+      <p>&copy; 2025 Pilateando con Agos. Todos los derechos reservados.</p>
+    </footer>
   </div>
 
   <script type="module">
-    // Import Firebase SDKs
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js';
+    import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js';
+    import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js';
 
-    // ✅ Configuración Firebase (con corrección)
     const firebaseConfig = {
-      apiKey: "AIzaSyCnDyqeQj8bMtMbSXLLDe_roz7KPUozQhQ",
-      authDomain: "pilateando-c534d.firebaseapp.com",
-      projectId: "pilateando-c534d",
-      storageBucket: "pilateando-c534d.appspot.com", // ✅ corregido
-      messagingSenderId: "595737907735",
-      appId: "1:595737907735:web:d113392a022aa1ed5b4252",
-      measurementId: "G-H2B69H0KP1"
+      apiKey: "AIzaSyAZTU_s3OrJxmJ0fy3qEjXu6J2wDBciglo",
+      authDomain: "pilateandoconagos.firebaseapp.com",
+      projectId: "pilateandoconagos",
+      storageBucket: "pilateandoconagos.appspot.com",
+      messagingSenderId: "159697443475",
+      appId: "1:159697443475:web:8c4eec3832332064f48b66",
+      measurementId: "G-7WY9D4J6H5"
     };
 
     const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const provider = new GoogleAuthProvider();
     const db = getFirestore(app);
+    const auth = getAuth(app);
 
-    const loginDiv = document.getElementById('login');
-    const mainDiv = document.getElementById('main');
-    const loginBtn = document.getElementById('loginBtn');
-    const demoBtn = document.getElementById('demoBtn');
-    const logoutBtn = document.getElementById('logoutBtn');
-    const userInfo = document.getElementById('userInfo');
-    const coursesDiv = document.getElementById('courses');
+    const demoCourses = [
+      { id: 'curso-inicial', title: 'Pilates Inicial', description: 'Ideal para quienes recién empiezan.', price:'USD 49', quiz: { q:'¿Cuál es el principio básico del Pilates para el centro del cuerpo?', options:['Respiración','Control y concentración','Velocidad'], answer:1 } },
+      { id: 'curso-intermedio', title: 'Pilates Intermedio', description: 'Mayor desafío para tu práctica.', price:'USD 59', quiz: { q:'¿Cuál es un objetivo del Pilates Intermedio?', options:['Fuerza','Estiramiento','Ambos'], answer:2 } }
+    ];
 
-    // ✅ Corrección del error (auth/cancelled-popup-request)
-    loginBtn.addEventListener('click', async () => {
-      if (!window.loginInProgress) {
-        window.loginInProgress = true;
-        try {
-          await signInWithPopup(auth, provider);
-        } catch (error) {
-          console.error("Error en login:", error);
-        } finally {
-          window.loginInProgress = false;
-        }
-      }
-    });
+    const demoWorkshops = [
+      { id:'taller-1', title:'Taller Respiración y Relajación', quiz:{q:'¿Qué se busca en la respiración durante el taller?', options:['Relajar','Agitar','Ignorar'], answer:0} },
+      { id:'taller-2', title:'Taller Movilidad y Estiramiento', quiz:{q:'Cuál es la postura clave para estiramiento?', options:['Recta','Encogida','Inclinada'], answer:0} }
+    ];
 
-    logoutBtn.addEventListener('click', () => {
-      signOut(auth);
-    });
+    const coursesEl = document.getElementById('courses');
+    const workshopsEl = document.getElementById('workshops');
+    const heroBg = document.getElementById('hero-bg');
+    const btnLoginOverlay = document.getElementById('btn-login-overlay');
+    const btnLoginNav = document.getElementById('btn-login');
+    const btnGuest = document.getElementById('btn-guest');
 
-    demoBtn.addEventListener('click', () => {
-      loginDiv.classList.add('hidden');
-      mainDiv.classList.remove('hidden');
-      userInfo.textContent = "Modo demo activado (sin guardar progreso)";
-      loadCourses();
-    });
+    let points = 0;
+    let badges = [];
 
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        loginDiv.classList.add('hidden');
-        mainDiv.classList.remove('hidden');
-        userInfo.innerHTML = `
-          <p><strong>Usuario:</strong> ${user.displayName}</p>
-          <p><strong>Email:</strong> ${user.email}</p>
+    function renderQuiz(quiz, container) {
+      const qEl = document.createElement('div');
+      qEl.innerHTML = `<p class="font-medium mb-2">${quiz.q}</p>`;
+      quiz.options.forEach((opt,i)=>{
+        const btn = document.createElement('button');
+        btn.className = 'block w-full text-left border rounded p-2 my-1';
+        btn.innerText = opt;
+        btn.onclick = ()=>{
+          if(btn.disabled) return;
+          if(i===quiz.answer){ points+=10; badges.push('✅'); btn.style.backgroundColor='#d1fae5'; }
+          else { btn.style.backgroundColor='#fecaca'; }
+          qEl.querySelectorAll('button').forEach(b=>b.disabled=true);
+        };
+        qEl.appendChild(btn);
+      });
+      container.appendChild(qEl);
+    }
+
+    function renderCourses(){
+      coursesEl.innerHTML='';
+      demoCourses.forEach(c=>{
+        const card = document.createElement('div');
+        card.className = 'p-4 bg-white rounded shadow-sm flex flex-col';
+        card.innerHTML = `
+          <h4 class="font-semibold text-[var(--accent-3)]">${c.title}</h4>
+          <p class="text-sm text-gray-500">${c.description}</p>
+          <p class="mt-2 font-semibold text-[var(--accent)]">${c.price}</p>
         `;
-        loadCourses();
-      } else {
-        loginDiv.classList.remove('hidden');
-        mainDiv.classList.add('hidden');
-      }
-    });
+        const quizContainer = document.createElement('div');
+        quizContainer.className='mt-2';
+        renderQuiz(c.quiz, quizContainer);
+        card.appendChild(quizContainer);
+        coursesEl.appendChild(card);
+      });
+    }
 
-    async function loadCourses() {
-      coursesDiv.innerHTML = "";
-      try {
-        const querySnapshot = await getDocs(collection(db, "cursos"));
-        querySnapshot.forEach((doc) => {
-          const curso = doc.data();
-          const div = document.createElement("div");
-          div.className = "card p-4";
-          div.innerHTML = `
-            <h4 class="text-lg font-semibold mb-2 text-[var(--accent)]">${curso.nombre}</h4>
-            <p class="mb-2">${curso.descripcion}</p>
-            <a href="${curso.url}" target="_blank" class="btn w-full mt-2">Ver Curso</a>
-          `;
-          coursesDiv.appendChild(div);
-        });
-      } catch (error) {
-        console.error("Error al cargar cursos:", error);
+    function renderWorkshops(){
+      workshopsEl.innerHTML='';
+      demoWorkshops.forEach(w=>{
+        const card = document.createElement('div');
+        card.className='p-4 bg-white rounded shadow-sm flex flex-col';
+        card.innerHTML=`<h4 class="font-semibold text-[var(--accent)]">${w.title}</h4>`;
+        const quizContainer = document.createElement('div');
+        quizContainer.className='mt-2';
+        renderQuiz(w.quiz, quizContainer);
+        card.appendChild(quizContainer);
+        workshopsEl.appendChild(card);
+      });
+    }
+
+    function showMainContent(user) {
+      if(user){
+        document.getElementById('main-content').classList.add('visible');
+        document.querySelector('body > div.min-h-screen.flex.items-center.justify-center').style.display = 'none';
+      } else {
+        document.getElementById('main-content').classList.remove('visible');
+        document.querySelector('body > div.min-h-screen.flex.items-center.justify-center').style.display = 'flex';
       }
     }
+
+    async function login() {
+      try {
+        if(auth.currentUser){
+          await signOut(auth);
+        } else {
+          await signInWithPopup(auth, new GoogleAuthProvider());
+        }
+      } catch (error) {
+        alert("Error al iniciar sesión: " + error.message);
+        console.error(error);
+      }
+    }
+
+    if (btnLoginOverlay) btnLoginOverlay.addEventListener('click', login);
+    if (btnLoginNav) btnLoginNav.addEventListener('click', login);
+
+    if (btnGuest) {
+      btnGuest.addEventListener('click', ()=>{
+        document.querySelector('body > div.min-h-screen.flex.items-center.justify-center').style.display = 'none';
+        document.getElementById('main-content').classList.add('visible');
+      });
+    }
+
+    onAuthStateChanged(auth,user=>{
+      showMainContent(user);
+      if (btnLoginNav)
+        btnLoginNav.innerText = user ? `Salir (${user.displayName || 'Mi cuenta'})` : 'Entrar / Registrarme';
+    });
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      renderCourses();
+      renderWorkshops();
+      setTimeout(()=> heroBg.classList.add('animate'), 600);
+    });
   </script>
 </body>
 </html>
