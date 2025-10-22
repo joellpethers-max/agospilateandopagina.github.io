@@ -7,14 +7,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root{
-      --accent: #800020; /* vino */
-      --accent-2: #FFB4A2; /* rosa pastel */
-      --accent-3: #556B2F; /* verde oliva fuerte */
+      --accent: #800020;
+      --accent-2: #FFB4A2;
+      --accent-3: #556B2F;
       --glass: rgba(255,255,255,0.08);
     }
-
     html,body { height:100%; }
-
     body {
       margin:0;
       font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
@@ -23,76 +21,26 @@
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
     }
-
-    /* Full-screen hero with background image */
-    .hero-bg {
-      position: fixed;
-      inset:0;
-      background-image: url("fondo.jpg");
-      background-size: cover;
-      background-position: center;
-      z-index: -2;
-      transform: scale(1.02);
-      transition: transform 0.8s ease;
-    }
-
+    .hero-bg { position: fixed; inset:0; background-image: url("fondo.jpg"); background-size: cover; background-position: center; z-index: -2; transform: scale(1.02); transition: transform 0.8s ease; }
     .hero-bg.animate { transform: scale(1.06); }
-
-    .bg-overlay {
-      position: fixed;
-      inset:0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.3) 100%);
-      z-index: -1;
-    }
-
-    /* login panel */
-    #login-panel {
-      backdrop-filter: blur(6px) saturate(120%);
-      background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
-    }
-
-    /* glowing accent button */
-    .btn-accent {
-      background: linear-gradient(90deg, var(--accent-3), var(--accent) 60%);
-      color: white;
-      box-shadow: 0 8px 20px rgba(128,0,32,0.25), 0 0 24px rgba(128,0,32,0.08) inset;
-      transition: transform .18s ease, box-shadow .18s ease;
-    }
+    .bg-overlay { position: fixed; inset:0; background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.3) 100%); z-index: -1; }
+    #login-panel { backdrop-filter: blur(6px) saturate(120%); background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 10px 30px rgba(0,0,0,0.45); }
+    .btn-accent { background: linear-gradient(90deg, var(--accent-3), var(--accent) 60%); color: white; box-shadow: 0 8px 20px rgba(128,0,32,0.25), 0 0 24px rgba(128,0,32,0.08) inset; transition: transform .18s ease, box-shadow .18s ease; }
     .btn-accent:hover { transform: translateY(-3px) scale(1.01); box-shadow: 0 12px 30px rgba(128,0,32,0.35); }
-
-    /* small animated icon */
     .pulse { animation: pulse 1.8s infinite; }
-    @keyframes pulse {
-      0%{ transform: scale(1); opacity: 0.9; }
-      50%{ transform: scale(1.06); opacity: 1; }
-      100%{ transform: scale(1); opacity: 0.9; }
-    }
-
+    @keyframes pulse { 0%{ transform: scale(1); opacity: 0.9; } 50%{ transform: scale(1.06); opacity: 1; } 100%{ transform: scale(1); opacity: 0.9; } }
     #main-content { display: none; }
     #main-content.visible { display: block; }
-
-    /* card glass */
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.88));
-    }
-
-    /* responsive tweaks */
-    @media (max-width: 640px) {
-      .hero-title { font-size: 1.6rem; }
-      #login-panel { padding: 1.2rem; }
-    }
+    .card { background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.88)); }
+    @media (max-width: 640px) { .hero-title { font-size: 1.6rem; } #login-panel { padding: 1.2rem; } }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
-  <!-- Background layers -->
   <div class="hero-bg" id="hero-bg"></div>
   <div class="bg-overlay"></div>
 
-  <!-- Login / prepage (centered) -->
-  <div id="login-wrapper" class="min-h-screen flex items-center justify-center px-4" style="gap:1.5rem;">
+  <div class="min-h-screen flex items-center justify-center px-4" style="gap:1.5rem;" id="login-wrapper">
     <div id="login-panel" class="rounded-3xl p-10 w-full max-w-3xl flex items-center gap-8 shadow-xl">
       <div class="flex-1 text-white">
         <div class="flex items-center gap-4 mb-6">
@@ -107,12 +55,10 @@
             <p class="text-sm text-white/80">Conecta cuerpo, mente y movimiento</p>
           </div>
         </div>
-
         <h2 class="hero-title text-4xl font-bold mb-3" style="color: #fff;">Bienvenido</h2>
         <p class="text-white/80 mb-6 max-w-md">
           Accedé a tus cursos y talleres. Iniciá sesión con Google para sincronizar tu progreso y contenidos.
         </p>
-
         <div class="flex gap-3 items-center">
           <button id="btn-login-overlay" class="btn-accent rounded-xl px-6 py-3 font-semibold flex items-center gap-3">
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -122,16 +68,12 @@
             </svg>
             Entrar / Registrarse
           </button>
-
           <a id="btn-guest" class="px-4 py-2 rounded-lg border border-white/12 text-white/90 hover:bg-white/6 cursor-pointer">Ver demo</a>
         </div>
-
         <p class="text-xs text-white/60 mt-4 max-w-sm">
           Al iniciar sesión aceptás nuestras políticas. (Demo: podés explorar sin cuenta)
         </p>
       </div>
-
-      <!-- Right: quick preview card -->
       <div class="w-80 hidden md:block">
         <div class="rounded-2xl overflow-hidden shadow-2xl">
           <img src="fondo.jpg" alt="Agos" class="w-full h-40 object-cover" />
@@ -145,11 +87,9 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- Main content (hidden until login) -->
   <div id="main-content" class="min-h-screen overlay pt-6 pb-12">
     <nav class="flex justify-between items-center px-8 py-4" style="background: linear-gradient(90deg, var(--accent-3), var(--accent)); color: white;">
       <div class="flex items-center gap-4">
@@ -174,11 +114,7 @@
     <section id="sobre-mi" class="px-8 py-12 max-w-4xl mx-auto">
       <div class="p-8 rounded-2xl card shadow-xl">
         <h3 class="text-3xl font-semibold text-[var(--accent-3)] mb-4">Sobre mí</h3>
-        <p>
-          ¡Hola! Soy Agos, instructora apasionada de pilates y bienestar físico. 
-          Mi misión es ayudarte a mejorar tu postura, flexibilidad y fuerza 
-          mientras cuidamos la mente y el alma.
-        </p>
+        <p>¡Hola! Soy Agos, instructora apasionada de pilates y bienestar físico. Mi misión es ayudarte a mejorar tu postura, flexibilidad y fuerza mientras cuidamos la mente y el alma.</p>
       </div>
     </section>
 
@@ -197,10 +133,9 @@
     </footer>
   </div>
 
-  <!-- Firebase + YouTube integration -->
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js';
-    import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js';
+    import { getFirestore, doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js';
     import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js';
 
     const firebaseConfig = {
@@ -218,39 +153,13 @@
     const auth = getAuth(app);
 
     const demoCourses = [
-      { 
-        id: 'curso-inicial', 
-        title: 'Pilates Inicial', 
-        description: 'Ideal para quienes recién empiezan.', 
-        price:'USD 49', 
-        video: 'https://www.youtube.com/embed/TU_VIDEO_OCULTO_1',
-        quiz: { q:'¿Cuál es el principio básico del Pilates para el centro del cuerpo?', options:['Respiración','Control y concentración','Velocidad'], answer:1 } 
-      },
-      { 
-        id: 'curso-intermedio', 
-        title: 'Pilates Intermedio', 
-        description: 'Mayor desafío para tu práctica.', 
-        price:'USD 59',
-        video: 'https://www.youtube.com/embed/TU_VIDEO_OCULTO_2',
-        quiz: { q:'¿Cuál es un objetivo del Pilates Intermedio?', options:['Fuerza','Estiramiento','Ambos'], answer:2 } 
-      }
+      { id: 'curso-inicial', title: 'Pilates Inicial', description: 'Ideal para quienes recién empiezan.', price:49, video: 'https://www.youtube.com/embed/fyLkvjQVgQ0?rel=0', quiz: { q:'¿Cuál es el principio básico del Pilates para el centro del cuerpo?', options:['Respiración','Control y concentración','Velocidad'], answer:1 } },
+      { id: 'curso-intermedio', title: 'Pilates Intermedio', description: 'Mayor desafío para tu práctica.', price:59, video: 'https://www.youtube.com/embed/fyLkvjQVgQ0?rel=0', quiz: { q:'¿Cuál es un objetivo del Pilates Intermedio?', options:['Fuerza','Estiramiento','Ambos'], answer:2 } }
     ];
 
     const demoWorkshops = [
-      { 
-        id:'taller-1', 
-        title:'Taller Respiración y Relajación', 
-        price: 'USD 29',
-        video:'https://www.youtube.com/embed/TU_VIDEO_OCULTO_3',
-        quiz:{q:'¿Qué se busca en la respiración durante el taller?', options:['Relajar','Agitar','Ignorar'], answer:0} 
-      },
-      { 
-        id:'taller-2', 
-        title:'Taller Movilidad y Estiramiento', 
-        price:'USD 39',
-        video:'https://www.youtube.com/embed/TU_VIDEO_OCULTO_4',
-        quiz:{q:'Cuál es la postura clave para estiramiento?', options:['Recta','Encogida','Inclinada'], answer:0} 
-      }
+      { id:'taller-1', title:'Taller Respiración y Relajación', price:29, video:'https://www.youtube.com/embed/fyLkvjQVgQ0?rel=0', quiz:{q:'¿Qué se busca en la respiración durante el taller?', options:['Relajar','Agitar','Ignorar'], answer:0} },
+      { id:'taller-2', title:'Taller Movilidad y Estiramiento', price:39, video:'https://www.youtube.com/embed/fyLkvjQVgQ0?rel=0', quiz:{q:'Cuál es la postura clave para estiramiento?', options:['Recta','Encogida','Inclinada'], answer:0} }
     ];
 
     const coursesEl = document.getElementById('courses');
@@ -260,8 +169,21 @@
     const btnLoginNav = document.getElementById('btn-login');
     const btnGuest = document.getElementById('btn-guest');
 
-    let points = 0;
-    let badges = [];
+    let currentUser = null;
+
+    async function hasPaid(userId, courseId){
+      if(!userId) return false;
+      const docRef = doc(db, "users", userId, "purchases", courseId);
+      const docSnap = await getDoc(docRef);
+      return docSnap.exists() && docSnap.data().paid;
+    }
+
+    async function processPayment(courseId, price){
+      if(!currentUser) { alert("Debés iniciar sesión primero."); return; }
+      // Simula pago
+      await setDoc(doc(db, "users", currentUser.uid, "purchases", courseId), { paid:true, date:new Date().toISOString() });
+      alert(`Pago de USD ${price} completado!`);
+    }
 
     function renderQuiz(quiz, container) {
       const qEl = document.createElement('div');
@@ -272,7 +194,7 @@
         btn.innerText = opt;
         btn.onclick = ()=>{
           if(btn.disabled) return;
-          if(i===quiz.answer){ points+=10; badges.push('✅'); btn.style.backgroundColor='#d1fae5'; }
+          if(i===quiz.answer){ btn.style.backgroundColor='#d1fae5'; }
           else { btn.style.backgroundColor='#fecaca'; }
           qEl.querySelectorAll('button').forEach(b=>b.disabled=true);
         };
@@ -281,55 +203,71 @@
       container.appendChild(qEl);
     }
 
-    function renderCourses(){
+    async function renderCourses(){
       coursesEl.innerHTML='';
-      demoCourses.forEach(c=>{
+      for(const c of demoCourses){
         const card = document.createElement('div');
         card.className = 'p-4 bg-white rounded shadow-sm flex flex-col';
-        card.innerHTML = `
-          <h4 class="font-semibold text-[var(--accent-3)]">${c.title}</h4>
-          <p class="text-sm text-gray-500">${c.description}</p>
-          <p class="mt-2 font-semibold text-[var(--accent)]">${c.price}</p>
-          <div class="mt-3">
-            <iframe class="w-full h-48 rounded" src="${c.video}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-        `;
-        const quizContainer = document.createElement('div');
-        quizContainer.className='mt-2';
-        renderQuiz(c.quiz, quizContainer);
-        card.appendChild(quizContainer);
+        card.innerHTML = `<h4 class="font-semibold text-[var(--accent-3)]">${c.title}</h4>
+                          <p class="text-sm text-gray-500">${c.description}</p>
+                          <p class="mt-2 font-semibold text-[var(--accent)]">USD ${c.price}</p>`;
+        const paid = await hasPaid(currentUser?.uid, c.id);
+        if(paid){
+          const videoEl = document.createElement('iframe');
+          videoEl.src = c.video;
+          videoEl.width='100%';
+          videoEl.height=240;
+          videoEl.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+          videoEl.allowFullscreen=true;
+          card.appendChild(videoEl);
+        } else {
+          const payBtn = document.createElement('button');
+          payBtn.className='mt-2 px-4 py-2 rounded bg-[var(--accent)] text-white font-semibold';
+          payBtn.innerText=`Pagar USD ${c.price}`;
+          payBtn.onclick = async ()=>{ await processPayment(c.id,c.price); renderCourses(); };
+          card.appendChild(payBtn);
+        }
+        const quizContainer = document.createElement('div'); quizContainer.className='mt-2'; renderQuiz(c.quiz, quizContainer); card.appendChild(quizContainer);
         coursesEl.appendChild(card);
-      });
+      }
     }
 
-    function renderWorkshops(){
+    async function renderWorkshops(){
       workshopsEl.innerHTML='';
-      demoWorkshops.forEach(w=>{
+      for(const w of demoWorkshops){
         const card = document.createElement('div');
         card.className='p-4 bg-white rounded shadow-sm flex flex-col';
-        card.innerHTML=`
-          <h4 class="font-semibold text-[var(--accent)]">${w.title}</h4>
-          <p class="mt-1 font-semibold text-[var(--accent-2)]">${w.price}</p>
-          <div class="mt-2">
-            <iframe class="w-full h-48 rounded" src="${w.video}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-        `;
-        const quizContainer = document.createElement('div');
-        quizContainer.className='mt-2';
-        renderQuiz(w.quiz, quizContainer);
-        card.appendChild(quizContainer);
+        card.innerHTML=`<h4 class="font-semibold text-[var(--accent)]">${w.title}</h4>
+                        <p class="mt-1 font-semibold text-[var(--accent)]">USD ${w.price}</p>`;
+        const paid = await hasPaid(currentUser?.uid, w.id);
+        if(paid){
+          const videoEl = document.createElement('iframe');
+          videoEl.src = w.video;
+          videoEl.width='100%';
+          videoEl.height=240;
+          videoEl.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+          videoEl.allowFullscreen=true;
+          card.appendChild(videoEl);
+        } else {
+          const payBtn = document.createElement('button');
+          payBtn.className='mt-2 px-4 py-2 rounded bg-[var(--accent)] text-white font-semibold';
+          payBtn.innerText=`Pagar USD ${w.price}`;
+          payBtn.onclick = async ()=>{ await processPayment(w.id,w.price); renderWorkshops(); };
+          card.appendChild(payBtn);
+        }
+        const quizContainer = document.createElement('div'); quizContainer.className='mt-2'; renderQuiz(w.quiz, quizContainer); card.appendChild(quizContainer);
         workshopsEl.appendChild(card);
-      });
+      }
     }
 
     function showMainContent(user) {
-      const loginWrapper = document.getElementById('login-wrapper');
+      currentUser = user;
       if(user){
         document.getElementById('main-content').classList.add('visible');
-        if(loginWrapper) loginWrapper.style.display = 'none';
+        document.getElementById('login-wrapper').style.display = 'none';
       } else {
         document.getElementById('main-content').classList.remove('visible');
-        if(loginWrapper) loginWrapper.style.display = 'flex';
+        document.getElementById('login-wrapper').style.display = 'flex';
       }
     }
 
@@ -348,25 +286,16 @@
 
     if (btnLoginOverlay) btnLoginOverlay.addEventListener('click', login);
     if (btnLoginNav) btnLoginNav.addEventListener('click', login);
-
-    if (btnGuest) {
-      btnGuest.addEventListener('click', ()=>{
-        const loginWrapper = document.getElementById('login-wrapper');
-        if(loginWrapper) loginWrapper.style.display = 'none';
-        document.getElementById('main-content').classList.add('visible');
-        if(btnLoginNav) btnLoginNav.style.display = 'none';
-      });
-    }
+    if (btnGuest) btnGuest.addEventListener('click', ()=>{ document.getElementById('login-wrapper').style.display = 'none'; document.getElementById('main-content').classList.add('visible'); });
 
     onAuthStateChanged(auth,user=>{
       showMainContent(user);
-      if (btnLoginNav)
-        btnLoginNav.innerText = user ? `Salir (${user.displayName || 'Mi cuenta'})` : 'Entrar / Registrarme';
+      if (btnLoginNav) btnLoginNav.innerText = user ? `Salir (${user.displayName || 'Mi cuenta'})` : 'Entrar / Registrarme';
+      renderCourses();
+      renderWorkshops();
     });
 
     document.addEventListener('DOMContentLoaded', ()=>{
-      renderCourses();
-      renderWorkshops();
       setTimeout(()=> heroBg.classList.add('animate'), 600);
     });
   </script>
