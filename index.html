@@ -92,7 +92,7 @@
   <div class="bg-overlay"></div>
 
   <!-- Login / prepage (centered) -->
-  <div class="min-h-screen flex items-center justify-center px-4" style="gap:1.5rem;">
+  <div id="login-wrapper" class="min-h-screen flex items-center justify-center px-4" style="gap:1.5rem;">
     <div id="login-panel" class="rounded-3xl p-10 w-full max-w-3xl flex items-center gap-8 shadow-xl">
       <div class="flex-1 text-white">
         <div class="flex items-center gap-4 mb-6">
@@ -197,7 +197,7 @@
     </footer>
   </div>
 
-  <!-- Firebase + App Logic -->
+  <!-- Firebase + YouTube integration -->
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js';
     import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js';
@@ -218,13 +218,39 @@
     const auth = getAuth(app);
 
     const demoCourses = [
-      { id: 'curso-inicial', title: 'Pilates Inicial', description: 'Ideal para quienes recién empiezan.', price:'USD 49', quiz: { q:'¿Cuál es el principio básico del Pilates para el centro del cuerpo?', options:['Respiración','Control y concentración','Velocidad'], answer:1 } },
-      { id: 'curso-intermedio', title: 'Pilates Intermedio', description: 'Mayor desafío para tu práctica.', price:'USD 59', quiz: { q:'¿Cuál es un objetivo del Pilates Intermedio?', options:['Fuerza','Estiramiento','Ambos'], answer:2 } }
+      { 
+        id: 'curso-inicial', 
+        title: 'Pilates Inicial', 
+        description: 'Ideal para quienes recién empiezan.', 
+        price:'USD 49', 
+        video: 'https://www.youtube.com/embed/TU_VIDEO_OCULTO_1',
+        quiz: { q:'¿Cuál es el principio básico del Pilates para el centro del cuerpo?', options:['Respiración','Control y concentración','Velocidad'], answer:1 } 
+      },
+      { 
+        id: 'curso-intermedio', 
+        title: 'Pilates Intermedio', 
+        description: 'Mayor desafío para tu práctica.', 
+        price:'USD 59',
+        video: 'https://www.youtube.com/embed/TU_VIDEO_OCULTO_2',
+        quiz: { q:'¿Cuál es un objetivo del Pilates Intermedio?', options:['Fuerza','Estiramiento','Ambos'], answer:2 } 
+      }
     ];
 
     const demoWorkshops = [
-      { id:'taller-1', title:'Taller Respiración y Relajación', quiz:{q:'¿Qué se busca en la respiración durante el taller?', options:['Relajar','Agitar','Ignorar'], answer:0} },
-      { id:'taller-2', title:'Taller Movilidad y Estiramiento', quiz:{q:'Cuál es la postura clave para estiramiento?', options:['Recta','Encogida','Inclinada'], answer:0} }
+      { 
+        id:'taller-1', 
+        title:'Taller Respiración y Relajación', 
+        price: 'USD 29',
+        video:'https://www.youtube.com/embed/TU_VIDEO_OCULTO_3',
+        quiz:{q:'¿Qué se busca en la respiración durante el taller?', options:['Relajar','Agitar','Ignorar'], answer:0} 
+      },
+      { 
+        id:'taller-2', 
+        title:'Taller Movilidad y Estiramiento', 
+        price:'USD 39',
+        video:'https://www.youtube.com/embed/TU_VIDEO_OCULTO_4',
+        quiz:{q:'Cuál es la postura clave para estiramiento?', options:['Recta','Encogida','Inclinada'], answer:0} 
+      }
     ];
 
     const coursesEl = document.getElementById('courses');
@@ -264,6 +290,9 @@
           <h4 class="font-semibold text-[var(--accent-3)]">${c.title}</h4>
           <p class="text-sm text-gray-500">${c.description}</p>
           <p class="mt-2 font-semibold text-[var(--accent)]">${c.price}</p>
+          <div class="mt-3">
+            <iframe class="w-full h-48 rounded" src="${c.video}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
         `;
         const quizContainer = document.createElement('div');
         quizContainer.className='mt-2';
@@ -278,7 +307,13 @@
       demoWorkshops.forEach(w=>{
         const card = document.createElement('div');
         card.className='p-4 bg-white rounded shadow-sm flex flex-col';
-        card.innerHTML=`<h4 class="font-semibold text-[var(--accent)]">${w.title}</h4>`;
+        card.innerHTML=`
+          <h4 class="font-semibold text-[var(--accent)]">${w.title}</h4>
+          <p class="mt-1 font-semibold text-[var(--accent-2)]">${w.price}</p>
+          <div class="mt-2">
+            <iframe class="w-full h-48 rounded" src="${w.video}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        `;
         const quizContainer = document.createElement('div');
         quizContainer.className='mt-2';
         renderQuiz(w.quiz, quizContainer);
@@ -288,12 +323,13 @@
     }
 
     function showMainContent(user) {
+      const loginWrapper = document.getElementById('login-wrapper');
       if(user){
         document.getElementById('main-content').classList.add('visible');
-        document.querySelector('body > div.min-h-screen.flex.items-center.justify-center').style.display = 'none';
+        if(loginWrapper) loginWrapper.style.display = 'none';
       } else {
         document.getElementById('main-content').classList.remove('visible');
-        document.querySelector('body > div.min-h-screen.flex.items-center.justify-center').style.display = 'flex';
+        if(loginWrapper) loginWrapper.style.display = 'flex';
       }
     }
 
@@ -315,8 +351,10 @@
 
     if (btnGuest) {
       btnGuest.addEventListener('click', ()=>{
-        document.querySelector('body > div.min-h-screen.flex.items-center.justify-center').style.display = 'none';
+        const loginWrapper = document.getElementById('login-wrapper');
+        if(loginWrapper) loginWrapper.style.display = 'none';
         document.getElementById('main-content').classList.add('visible');
+        if(btnLoginNav) btnLoginNav.style.display = 'none';
       });
     }
 
