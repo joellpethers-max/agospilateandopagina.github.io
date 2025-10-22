@@ -33,6 +33,13 @@
     #main-content.visible { display: block; }
     .card { background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.88)); }
     @media (max-width: 640px) { .hero-title { font-size: 1.6rem; } #login-panel { padding: 1.2rem; } }
+    .video-overlay {
+      position: absolute; top:0; left:0; width:100%; height:100%;
+      background: rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center;
+      color:white; font-weight:bold; font-size:1.1rem; border-radius:0.25rem;
+      cursor:pointer;
+    }
+    .video-container { position:relative; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -180,7 +187,6 @@
 
     async function processPayment(courseId, price){
       if(!currentUser) { alert("Debés iniciar sesión primero."); return; }
-      // Simula pago
       await setDoc(doc(db, "users", currentUser.uid, "purchases", courseId), { paid:true, date:new Date().toISOString() });
       alert(`Pago de USD ${price} completado!`);
     }
@@ -211,22 +217,27 @@
         card.innerHTML = `<h4 class="font-semibold text-[var(--accent-3)]">${c.title}</h4>
                           <p class="text-sm text-gray-500">${c.description}</p>
                           <p class="mt-2 font-semibold text-[var(--accent)]">USD ${c.price}</p>`;
+        const container = document.createElement('div'); container.className='mt-2 video-container';
+        const iframePreview = document.createElement('iframe');
+        iframePreview.src = c.video + '&controls=0';
+        iframePreview.width='100%'; iframePreview.height=180;
+        iframePreview.style.opacity='0.6'; iframePreview.style.pointerEvents='none';
+        container.appendChild(iframePreview);
         const paid = await hasPaid(currentUser?.uid, c.id);
         if(paid){
-          const videoEl = document.createElement('iframe');
-          videoEl.src = c.video;
-          videoEl.width='100%';
-          videoEl.height=240;
-          videoEl.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-          videoEl.allowFullscreen=true;
-          card.appendChild(videoEl);
+          iframePreview.src = c.video;
+          iframePreview.height=240; iframePreview.style.opacity='1'; iframePreview.style.pointerEvents='auto';
         } else {
-          const payBtn = document.createElement('button');
-          payBtn.className='mt-2 px-4 py-2 rounded bg-[var(--accent)] text-white font-semibold';
-          payBtn.innerText=`Pagar USD ${c.price}`;
-          payBtn.onclick = async ()=>{ await processPayment(c.id,c.price); renderCourses(); };
-          card.appendChild(payBtn);
+          const overlay = document.createElement('div');
+          overlay.className='video-overlay';
+          overlay.innerText='Paga para ver completo';
+          overlay.onclick = async ()=>{
+            await processPayment(c.id,c.price);
+            renderCourses();
+          };
+          container.appendChild(overlay);
         }
+        card.appendChild(container);
         const quizContainer = document.createElement('div'); quizContainer.className='mt-2'; renderQuiz(c.quiz, quizContainer); card.appendChild(quizContainer);
         coursesEl.appendChild(card);
       }
@@ -239,22 +250,27 @@
         card.className='p-4 bg-white rounded shadow-sm flex flex-col';
         card.innerHTML=`<h4 class="font-semibold text-[var(--accent)]">${w.title}</h4>
                         <p class="mt-1 font-semibold text-[var(--accent)]">USD ${w.price}</p>`;
+        const container = document.createElement('div'); container.className='mt-2 video-container';
+        const iframePreview = document.createElement('iframe');
+        iframePreview.src = w.video + '&controls=0';
+        iframePreview.width='100%'; iframePreview.height=180;
+        iframePreview.style.opacity='0.6'; iframePreview.style.pointerEvents='none';
+        container.appendChild(iframePreview);
         const paid = await hasPaid(currentUser?.uid, w.id);
         if(paid){
-          const videoEl = document.createElement('iframe');
-          videoEl.src = w.video;
-          videoEl.width='100%';
-          videoEl.height=240;
-          videoEl.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-          videoEl.allowFullscreen=true;
-          card.appendChild(videoEl);
+          iframePreview.src = w.video;
+          iframePreview.height=240; iframePreview.style.opacity='1'; iframePreview.style.pointerEvents='auto';
         } else {
-          const payBtn = document.createElement('button');
-          payBtn.className='mt-2 px-4 py-2 rounded bg-[var(--accent)] text-white font-semibold';
-          payBtn.innerText=`Pagar USD ${w.price}`;
-          payBtn.onclick = async ()=>{ await processPayment(w.id,w.price); renderWorkshops(); };
-          card.appendChild(payBtn);
+          const overlay = document.createElement('div');
+          overlay.className='video-overlay';
+          overlay.innerText='Paga para ver completo';
+          overlay.onclick = async ()=>{
+            await processPayment(w.id,w.price);
+            renderWorkshops();
+          };
+          container.appendChild(overlay);
         }
+        card.appendChild(container);
         const quizContainer = document.createElement('div'); quizContainer.className='mt-2'; renderQuiz(w.quiz, quizContainer); card.appendChild(quizContainer);
         workshopsEl.appendChild(card);
       }
@@ -278,10 +294,7 @@
         } else {
           await signInWithPopup(auth, new GoogleAuthProvider());
         }
-      } catch (error) {
-        alert("Error al iniciar sesión: " + error.message);
-        console.error(error);
-      }
+      } catch (error) { alert("Error al iniciar sesión: " + error.message); console.error(error); }
     }
 
     if (btnLoginOverlay) btnLoginOverlay.addEventListener('click', login);
@@ -295,9 +308,7 @@
       renderWorkshops();
     });
 
-    document.addEventListener('DOMContentLoaded', ()=>{
-      setTimeout(()=> heroBg.classList.add('animate'), 600);
-    });
+    document.addEventListener('DOMContentLoaded', ()=>{ setTimeout(()=> heroBg.classList.add('animate'), 600); });
   </script>
 </body>
 </html>
