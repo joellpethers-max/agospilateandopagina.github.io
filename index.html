@@ -21,20 +21,12 @@
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
     }
-    .hero-bg { 
-      position: fixed; 
-      inset:0; 
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      z-index: -2; 
-      transform: scale(1.02); 
-      transition: transform 0.8s ease; 
-    }
+    .hero-bg { position: fixed; inset:0; background-image: url("fondo.jpg"); background-size: cover; background-position: center; z-index: -2; transform: scale(1.02); transition: transform 0.8s ease; }
     .hero-bg.animate { transform: scale(1.06); }
     .bg-overlay { position: fixed; inset:0; background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.35) 100%); z-index: -1; }
     #login-panel { backdrop-filter: blur(6px) saturate(120%); background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 10px 30px rgba(0,0,0,0.45); }
     .btn-accent { background: linear-gradient(90deg, var(--accent-3), var(--accent) 60%); color: white; box-shadow: 0 8px 20px rgba(128,0,32,0.25), 0 0 24px rgba(128,0,32,0.08) inset; transition: transform .18s ease, box-shadow .18s ease; }
     .btn-accent:hover { transform: translateY(-3px) scale(1.01); box-shadow: 0 12px 30px rgba(128,0,32,0.35); }
-    .btn-accent:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
     .pulse { animation: pulse 1.8s infinite; }
     @keyframes pulse { 0%{ transform: scale(1); opacity: 0.9; } 50%{ transform: scale(1.06); opacity: 1; } 100%{ transform: scale(1); opacity: 0.9; } }
     #main-content { display: none; }
@@ -45,47 +37,26 @@
       position: absolute; top:0; left:0; width:100%; height:100%;
       background: rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center;
       color:white; font-weight:bold; font-size:1.1rem; border-radius:0.25rem;
-      cursor:pointer; flex-direction: column; gap: 0.5rem;
+      cursor:pointer;
     }
     .video-container { position:relative; }
     .accordion-header { cursor:pointer; }
-    .fucsia-fina { color:#FF1493; font-weight:300; }
+    .fucsia-fina { color:#FF66CC; font-weight:300; }
     .locked { opacity: 0.6; pointer-events: none; position: relative; }
-    .lock-badge { position: absolute; top:8px; right:8px; background: rgba(0,0,0,0.7); color:white; padding:4px 8px; border-radius:6px; font-size:12px; font-weight: 600; }
-    .modal-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.7); display:flex; align-items:center; justify-content:center; z-index:60; }
-    .modal { background:white; border-radius:12px; max-width:920px; width:95%; max-height:90vh; overflow:auto; padding:1.5rem; }
-    .cover-membership { 
-      background-size:cover; 
-      background-position:center; 
-      border-radius:12px; 
-      height:280px; 
-      position:relative; 
-      display:flex; 
-      align-items:flex-end; 
-      padding:1.5rem; 
-      color:white; 
-      background: linear-gradient(135deg, var(--accent-3), var(--accent));
-    }
-    .cover-membership .cover-filter { 
-      position:absolute; 
-      inset:0; 
-      background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.6)); 
-      border-radius:12px; 
-      display:flex; 
-      align-items:flex-end; 
-      padding:1.5rem; 
-    }
-    .about-card { display:flex; gap:1rem; align-items:center; background: linear-gradient(180deg,#fff,#f9f9f9); padding:1.5rem; border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .lock-badge { position: absolute; top:8px; right:8px; background: rgba(0,0,0,0.6); color:white; padding:4px 8px; border-radius:6px; font-size:12px; }
+    /* Modal */
+    .modal-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; z-index:60; }
+    .modal { background:white; border-radius:12px; max-width:920px; width:95%; max-height:90vh; overflow:auto; padding:1rem; }
+    .cover-membership { background-size:cover; background-position:center; border-radius:12px; height:260px; position:relative; display:flex; align-items:flex-end; padding:1rem; color:white; }
+    .cover-membership .cover-filter { position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.6)); border-radius:12px; display:flex; align-items:flex-end; padding:1rem; color:white; }
+    /* Sobre mi */
+    .about-card { display:flex; gap:1rem; align-items:center; background: linear-gradient(180deg,#fff,#fff); padding:1rem; border-radius:12px; }
     .about-photo { width:120px; height:120px; border-radius:12px; object-fit:cover; flex-shrink:0; }
     .preview-grid { display:grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap:12px; margin-top:12px; }
-    .preview-thumb { position:relative; border-radius:8px; overflow:hidden; background:#000; cursor: pointer; transition: transform 0.2s; }
-    .preview-thumb:hover { transform: scale(1.02); }
-    .preview-thumb img { width:100%; height:140px; object-fit:cover; display:block; filter:brightness(0.7); }
-    .preview-thumb .meta { padding:8px; font-size:14px; color: white; background: rgba(0,0,0,0.8); }
+    .preview-thumb { position:relative; border-radius:8px; overflow:hidden; background:#000; }
+    .preview-thumb img { width:100%; height:140px; object-fit:cover; display:block; filter:brightness(0.8); }
+    .preview-thumb .meta { padding:8px; font-size:14px; }
     .preview-play { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:white; font-size:24px; pointer-events:none; }
-    .success-badge { background: #10b981; color: white; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600; }
-    .nav-link { transition: all 0.2s; }
-    .nav-link:hover { transform: translateY(-2px); }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -93,7 +64,7 @@
   <div class="hero-bg" id="hero-bg" aria-hidden="true"></div>
   <div class="bg-overlay"></div>
 
-  <!-- LOGIN / PREVIEW -->
+  <!-- LOGIN / PREVIEW (initial view). Left: login / demo. Right: preview comprar curso -->
   <div class="min-h-screen flex items-center justify-center px-4" style="gap:1.5rem;" id="login-wrapper">
     <div id="login-panel" class="rounded-3xl p-8 w-full max-w-4xl flex items-start gap-6 shadow-xl">
       <div class="flex-1 text-white">
@@ -106,140 +77,125 @@
           </div>
           <div>
             <h1 class="text-xl font-extrabold" style="color: white;">Ponete las Pila-tes</h1>
-            <p class="text-xs text-white/80">Conectá cuerpo, mente y movimiento</p>
+            <p class="text-xs text-white/80">Conecta cuerpo, mente y movimiento</p>
           </div>
         </div>
 
-        <h2 class="hero-title text-3xl font-bold mb-2" style="color: #fff;">Bienvenido/a</h2>
-        <p class="fucsia-fina mb-4 max-w-md" style="font-size: 0.95rem;">
-          Un espacio creado con amor y dedicación para ayudarte a conectar con tu cuerpo, tu respiración y tu bienestar.
+        <h2 class="hero-title text-3xl font-bold mb-2" style="color: #fff;">Bienvenido</h2>
+        <p class="text-white/80 fucsia-fina mb-4 max-w-md">
+          Un espacio creado con amor para ayudarte a conectar con tu cuerpo. Registrate para acceder a la membresía y cursos.
         </p>
 
-        <div class="flex gap-3 items-center flex-wrap">
+        <div class="flex gap-3 items-center">
           <button id="btn-login-overlay" class="btn-accent rounded-xl px-5 py-2 font-semibold flex items-center gap-3">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none"><path d="M12 2v20" stroke="white" stroke-width="1.6"/><path d="M5 12h14" stroke="white" stroke-width="1.6"/></svg>
-            Entrar / Registrarme
+            Entrar / Registrarse
           </button>
           <a id="btn-guest" class="px-4 py-2 rounded-lg border border-white/12 text-white/90 hover:bg-white/6 cursor-pointer">Ver demo</a>
         </div>
 
         <p class="text-xs text-white/60 mt-4 max-w-sm">
-          Demo: podés explorar sin cuenta, pero no reproducir videos completos. Al iniciar sesión aceptás nuestras políticas.
+          (Demo: podés explorar sin cuenta, no reproduce los videos completos). Al iniciar sesión aceptás nuestras políticas.
         </p>
       </div>
 
-      <!-- Vista previa de compra -->
+      <!-- Vista previa de compra (lado derecho del login) -->
       <div class="w-80 bg-white/8 p-4 rounded-xl">
-        <h3 class="text-lg font-semibold text-white mb-2">🔥 Oferta: Nivel Inicial</h3>
-        <p class="text-sm text-white/80 mb-2">USD 49 — 3 ejes con videos y exámenes. Pagá y guardá tu progreso.</p>
+        <h3 class="text-lg font-semibold text-[var(--accent-3)] mb-2">Vista previa: Nivel Inicial</h3>
+        <p class="text-sm text-white/80 mb-2">USD 49 — 3 ejes con videos y exámenes. Pagá y guarda tu progreso.</p>
         <div class="flex gap-2">
-          <button id="btn-mini-pay" class="btn-accent px-3 py-1 rounded flex-1 text-sm font-semibold">Comprar USD 49</button>
+          <button id="btn-mini-pay" class="btn-accent px-3 py-1 rounded flex-1">Pagar USD 49</button>
         </div>
-        <ul class="text-xs text-white/70 mt-3 space-y-1">
-          <li>✓ Acceso de por vida</li>
-          <li>✓ 3 ejes progresivos</li>
-          <li>✓ Exámenes de aprobación</li>
-          <li>✓ Progreso guardado</li>
-        </ul>
-        <p class="text-xs text-white/50 mt-3">Demo: solo vista previa. Registrate y pagá para desbloquear.</p>
+        <p class="text-xs text-white/60 mt-3">Demo: solo vista previa. Registrate y pagá para desbloquear contenidos.</p>
       </div>
     </div>
   </div>
 
-  <!-- MAIN CONTENT -->
+  <!-- MAIN CONTENT (hidden until login or demo) -->
   <div id="main-content" class="min-h-screen overlay pt-6 pb-12">
     <nav class="flex justify-between items-center px-8 py-4" style="background: linear-gradient(90deg, var(--accent-3), var(--accent)); color: white;">
       <div class="flex items-center gap-4">
-        <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M3 12c0-5 4-9 9-9s9 4 9 9" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
-            <path d="M6 16c2-2 5-3 8-3s6 1 8 3" stroke="var(--accent-2)" stroke-width="1.6" stroke-linecap="round"/>
-          </svg>
-        </div>
+        <img src="logo.png" alt="Logo" class="h-10 w-10 object-contain">
         <h1 class="text-2xl font-bold text-white">Ponete las Pila-tes</h1>
       </div>
       <ul class="flex items-center gap-6">
-        <li><a href="#membresia" class="text-white/90 hover:text-white nav-link">Membresía</a></li>
-        <li><a href="#cursos" class="text-white/90 hover:text-white nav-link">Cursos</a></li>
-        <li><a href="#talleres" class="text-white/90 hover:text-white nav-link">Talleres</a></li>
-        <li><a href="#sobre-mi" class="text-white/90 hover:text-white nav-link">Sobre mí</a></li>
-        <li><button id="btn-login" class="px-3 py-1 border rounded bg-[var(--accent-2)] text-[var(--accent)] font-semibold hover:bg-opacity-90">Entrar</button></li>
+        <li><a href="#membresia" class="text-[var(--accent-2)] hover:underline">Membresía</a></li>
+        <li><a href="#cursos" class="text-[var(--accent-2)] hover:underline">Cursos</a></li>
+        <li><a href="#talleres" class="text-[var(--accent-2)] hover:underline">Talleres</a></li>
+        <li><a href="#sobre-mi" class="text-[var(--accent-2)] hover:underline">Sobre mí</a></li>
+        <li><button id="btn-login" class="px-3 py-1 border rounded bg-[var(--accent-2)] text-[var(--accent)]">Entrar / Registrarme</button></li>
       </ul>
     </nav>
 
-    <!-- MEMBRESÍA (ARRIBA) -->
+    <!-- MEMBERSHIP (esta sección aparece arriba como pediste) -->
     <section id="membresia" class="px-8 py-8 max-w-6xl mx-auto">
-      <div class="cover-membership mb-4" id="membership-cover">
+      <!-- Cover / Portada con imagen personal -->
+      <div class="cover-membership mb-4" id="membership-cover" style="background-image: url('agostina-portada.jpg');">
         <div class="cover-filter">
           <div style="z-index:2;">
-            <h2 class="text-3xl font-bold">Membresía: Clases Martes y Jueves</h2>
-            <p class="text-sm">Clases en vivo por Zoom + videos grabados. Acceso solo para suscriptores.</p>
+            <h2 class="text-3xl font-bold">Membresía: Martes y Jueves</h2>
+            <p class="text-sm">Clases en vivo + videos grabados. Acceso solo para suscriptores.</p>
           </div>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="p-4 bg-white rounded shadow-sm">
-          <h3 class="font-semibold text-[var(--accent-3)] text-xl">Membresía Mensual</h3>
-          <p class="mt-1 font-bold text-[var(--accent)] text-2xl">USD <span id="membership-price">99</span></p>
-          <p class="text-xs text-gray-600 mt-2">Acceso a clases en vivo (Zoom) los Martes y Jueves, videos grabados y recursos. Solo suscriptores pueden ver videos completos y unirse al Zoom.</p>
-          <div class="flex gap-2 mt-3 flex-col">
-            <button id="btn-pay-membership" class="btn-accent px-3 py-2 rounded font-semibold">Pagar Membresía</button>
-            <button id="btn-membership-open" class="px-3 py-2 rounded border text-[var(--accent-3)] hover:bg-gray-50">Ver Clases Grabadas</button>
-            <button id="btn-join-zoom" class="px-3 py-2 rounded border text-white bg-[var(--accent-3)] hover:bg-opacity-90 hidden font-semibold">Unirse al Zoom en Vivo</button>
+          <h3 class="font-semibold text-[var(--accent-3)]">Membresía Martes y Jueves</h3>
+          <p class="mt-1 font-semibold text-[var(--accent-3)]">USD <span id="membership-price">99</span></p>
+          <p class="text-xs text-gray-600 mt-2">Acceso a las clases en vivo (Zoom), videos grabados y recursos adicionales. Solo suscriptores pueden abrir videos y links de Zoom.</p>
+          <div class="flex gap-2 mt-3">
+            <button id="btn-pay-membership" class="btn-accent px-3 py-1 rounded">Pagar Membresía</button>
+            <button id="btn-membership-open" class="px-3 py-1 rounded border text-[var(--accent-2)]">Ver Clases Grabadas</button>
+          </div>
+
+          <div class="mt-4">
+            <button id="btn-join-zoom" class="w-full px-3 py-2 rounded border text-white bg-[var(--accent-3)] hidden">Unirse al Vivo (Zoom)</button>
           </div>
         </div>
 
+        <!-- Lista de videos + enlaces (se renderiza dinámicamente según pago) -->
         <div class="col-span-2 p-4 bg-white rounded shadow-sm">
-          <div id="membership-info">
-            <h4 class="font-semibold mb-2 text-[var(--accent-3)]">Información de la membresía</h4>
-            <ul class="text-sm text-gray-700 space-y-1">
-              <li>📅 Clases en vivo: Martes y Jueves a las 19:00 hs</li>
-              <li>📹 Videos grabados de todas las clases</li>
-              <li>💪 Rutinas progresivas y personalizadas</li>
-              <li>🎯 Acceso ilimitado mientras tu membresía esté activa</li>
-            </ul>
-          </div>
+          <div id="membership" class="space-y-4"></div>
+          <!-- Preview area (se despliega al presionar "Ver Clases Grabadas") -->
           <div id="membership-preview" class="mt-4" style="display:none;">
-            <h4 class="font-semibold mb-2 text-[var(--accent-3)]">Clases grabadas disponibles</h4>
+            <h4 class="font-semibold mb-2 text-[var(--accent-3)]">Vista previa de clases grabadas</h4>
             <div id="preview-grid" class="preview-grid"></div>
-            <p id="preview-note" class="text-xs text-gray-500 mt-3">Para ver el video completo, registrate y pagá la membresía.</p>
+            <p id="preview-note" class="text-xs text-gray-500 mt-3">Para ver el video completo registrate y pagá la membresía. En demo se muestran mini-previews.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SOBRE MÍ -->
+    <!-- SOBRE MÍ (nueva sección solicitada) -->
     <section id="sobre-mi" class="px-8 py-8 max-w-6xl mx-auto">
       <h3 class="text-3xl font-semibold text-[var(--accent-3)] mb-4">Sobre mí</h3>
       <div class="about-card">
-        <div class="about-photo bg-gradient-to-br from-[var(--accent-3)] to-[var(--accent)] flex items-center justify-center text-white text-4xl font-bold">
-          AB
-        </div>
+        <img src="agostina-foto.jpg" alt="Agostina Bonnet" class="about-photo" />
         <div>
-          <h4 class="text-xl font-bold text-[var(--accent)]">Agostina Bonnet</h4>
+          <h4 class="text-xl font-bold">Agostina Bonnet</h4>
           <p class="text-sm text-gray-700 mt-2">
             Soy Agostina Bonnet, profesora de Educación Física e instructora certificada de Pilates (mat y reformer). Trabajo acompañando a mis alumnas y alumnos a mejorar la movilidad, la postura y la conexión mente-cuerpo a través de prácticas seguras y progresivas. Mi enfoque combina técnica, respiración y flujos orientados a resultados reales: más fuerza, estabilidad y bienestar.
           </p>
           <p class="text-sm text-gray-600 mt-3">
-            Clases en vivo los martes y jueves. También encontrarás clases grabadas, talleres y programas por niveles.
+            Clases en vivo los martes y jueves; también encontrarás clases grabadas, talleres y programas por niveles.
           </p>
-          <div class="mt-3 flex gap-3 flex-wrap">
-            <a href="#membresia" class="px-4 py-2 rounded bg-[var(--accent)] text-white hover:bg-opacity-90">Unirme a la membresía</a>
-            <a href="#cursos" class="px-4 py-2 rounded border text-[var(--accent-3)] hover:bg-gray-50">Ver cursos</a>
+          <div class="mt-3 flex gap-3">
+            <a href="#membresia" class="px-4 py-2 rounded bg-[var(--accent)] text-white">Unirme a la membresía</a>
+            <a href="#cursos" class="px-4 py-2 rounded border text-[var(--accent-3)]">Ver cursos</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CURSOS -->
+    <!-- Cursos -->
     <section id="cursos" class="px-8 py-12 max-w-6xl mx-auto">
       <h3 class="text-3xl font-semibold text-[var(--accent-3)] mb-6">Cursos</h3>
       <div id="courses" class="space-y-6 grid grid-cols-1 md:grid-cols-3 gap-4"></div>
       <div id="course-detail" class="hidden space-y-4 mt-8"></div>
     </section>
 
-    <!-- TALLERES -->
+    <!-- Talleres -->
     <section id="talleres" class="px-8 py-12 max-w-6xl mx-auto">
       <h3 class="text-3xl font-semibold text-[var(--accent)] mb-6">Talleres</h3>
       <div id="workshops" class="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-4"></div>
@@ -247,18 +203,33 @@
 
     <footer class="text-center py-6 mt-12" style="background: linear-gradient(90deg, var(--accent-3), var(--accent)); color: white;">
       <p>&copy; 2025 Ponete las Pila-tes. Todos los derechos reservados.</p>
-      <p class="text-xs mt-2 text-white/70">Desarrollado con ❤️ para el bienestar</p>
     </footer>
   </div>
 
-  <!-- Modal -->
+  <!-- Modal (video player / detalles) -->
   <div id="modal-root" style="display:none;"></div>
 
 <script type="module">
+/* ==================================================
+   App completo: Firebase Auth + Firestore + MercadoPago
+   ==================================================
+   Este archivo incluye:
+   - Sección "Sobre mí" (Agostina Bonnet)
+   - Portada con imagen personal: agostina-portada.jpg (reemplazar según corresponda)
+   - Foto en sección sobre-mi: agostina-foto.jpg (reemplazar según corresponda)
+   - Botón "Ver Clases Grabadas" que despliega una vista previa de miniaturas
+   - Botón "Unirse al vivo (Zoom)" visible SOLO si la membresía está pagada
+   - Mantiene lógica de pagos con Mercado Pago y Firebase
+*/
+
+/* =========================
+   Firebase (Auth + Firestore)
+   ========================= */
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js';
-import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion, serverTimestamp } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js';
+import { getFirestore, doc, getDoc, setDoc, collection, getDocs, updateDoc, arrayUnion, serverTimestamp } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js';
 import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js';
 
+/* === CONFIG FIREBASE: reemplaza si necesitas otros valores === */
 const firebaseConfig = {
   apiKey: "AIzaSyAZTU_s3OrJxmJ0fy3qEjXu6J2wDBciglo",
   authDomain: "pilateandoconagos.firebaseapp.com",
@@ -272,195 +243,53 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-const MP_ACCESS_TOKEN = 'APP_USR-9bd267a7-6de7-4597-942f-333b92a7df07';
-
-const demoMembership = [{
-  id: 'membresia-2025',
-  title: 'Membresía Martes y Jueves',
-  price: 99,
-  zoom: [
-    { label: 'Martes 19:00 hs', url: 'https://zoom.us/j/ejemplo-martes' },
-    { label: 'Jueves 19:00 hs', url: 'https://zoom.us/j/ejemplo-jueves' }
-  ],
-  videos: [
-    { title: 'Clase 1: Fundamentos', url: 'https://www.youtube.com/embed/nolkPq64TrY', thumb: 'https://img.youtube.com/vi/nolkPq64TrY/hqdefault.jpg' },
-    { title: 'Clase 2: Postura y Alineación', url: 'https://www.youtube.com/embed/nolkPq64TrY', thumb: 'https://img.youtube.com/vi/nolkPq64TrY/hqdefault.jpg' },
-    { title: 'Clase 3: Respiración Consciente', url: 'https://www.youtube.com/embed/nolkPq64TrY', thumb: 'https://img.youtube.com/vi/nolkPq64TrY/hqdefault.jpg' },
-    { title: 'Clase 4: Core y Estabilidad', url: 'https://www.youtube.com/embed/nolkPq64TrY', thumb: 'https://img.youtube.com/vi/nolkPq64TrY/hqdefault.jpg' }
-  ]
-}];
-
-const demoCourses = [
-  { 
-    id: 'basic', 
-    title: 'Nivel Inicial', 
-    description: 'Aprendé desde cero los fundamentos del Pilates', 
-    price: 49, 
-    ejes: [
-      {
-        id: 'b-eje1', 
-        title: 'Eje 1 - Fundamentos del Pilates', 
-        videos: [
-          { title: 'Introducción al Pilates', url: 'https://www.youtube.com/embed/nolkPq64TrY' },
-          { title: 'Principios básicos', url: 'https://www.youtube.com/embed/nolkPq64TrY' }
-        ], 
-        quiz: {
-          q: '¿Cuál es el principio fundamental del Pilates?', 
-          options: ['Control y precisión', 'Velocidad y fuerza', 'Resistencia máxima', 'Flexibilidad extrema'], 
-          answer: 0
-        }
-      },
-      {
-        id: 'b-eje2', 
-        title: 'Eje 2 - Postura y Alineación', 
-        videos: [
-          { title: 'Alineación de la columna', url: 'https://www.youtube.com/embed/nolkPq64TrY' },
-          { title: 'Ejercicios de postura', url: 'https://www.youtube.com/embed/nolkPq64TrY' }
-        ], 
-        quiz: {
-          q: '¿Cuál es la posición neutral de la pelvis?', 
-          options: ['Rotación anterior', 'Posición neutra sin rotación', 'Rotación posterior'], 
-          answer: 1
-        }
-      },
-      {
-        id: 'b-eje3', 
-        title: 'Eje 3 - Respiración y Flujo', 
-        videos: [
-          { title: 'Técnicas de respiración', url: 'https://www.youtube.com/embed/nolkPq64TrY' },
-          { title: 'Flujo de movimiento', url: 'https://www.youtube.com/embed/nolkPq64TrY' }
-        ], 
-        quiz: {
-          q: '¿Cómo debe ser la respiración en Pilates?', 
-          options: ['Superficial', 'Profunda y torácica', 'Irregular'], 
-          answer: 1
-        }
-      }
-    ]
-  },
-  { 
-    id: 'intermedio', 
-    title: 'Nivel Intermedio', 
-    description: 'Avanzá en tu práctica con ejercicios más complejos', 
-    price: 59, 
-    ejes: [
-      {
-        id: 'i-eje1', 
-        title: 'Eje 1 - Fortalecimiento del Core', 
-        videos: [
-          { title: 'Core avanzado', url: 'https://www.youtube.com/embed/nolkPq64TrY' }
-        ], 
-        quiz: {
-          q: '¿Qué músculos forman el core?', 
-          options: ['Solo abdominales', 'Abdomen, espalda baja, pelvis', 'Solo la espalda'], 
-          answer: 1
-        }
-      },
-      {
-        id: 'i-eje2', 
-        title: 'Eje 2 - Control y Precisión', 
-        videos: [
-          { title: 'Movimientos controlados', url: 'https://www.youtube.com/embed/nolkPq64TrY' }
-        ], 
-        quiz: {
-          q: '¿Qué es más importante en Pilates intermedio?', 
-          options: ['Cantidad de repeticiones', 'Calidad y control del movimiento'], 
-          answer: 1
-        }
-      },
-      {
-        id: 'i-eje3', 
-        title: 'Eje 3 - Secuencias Dinámicas', 
-        videos: [
-          { title: 'Secuencias fluidas', url: 'https://www.youtube.com/embed/nolkPq64TrY' }
-        ], 
-        quiz: {
-          q: '¿Cómo deben encadenarse los ejercicios?', 
-          options: ['Con pausas largas', 'Con fluidez y transiciones suaves'], 
-          answer: 1
-        }
-      }
-    ]
-  },
-  { 
-    id: 'elite', 
-    title: 'Nivel Elite', 
-    description: 'Para practicantes avanzados que buscan dominar el Pilates', 
-    price: 79, 
-    ejes: [
-      {
-        id: 'e-eje1', 
-        title: 'Eje 1 - Ejercicios Avanzados', 
-        videos: [
-          { title: 'Ejercicios complejos', url: 'https://www.youtube.com/embed/nolkPq64TrY' }
-        ], 
-        quiz: {
-          q: '¿Qué caracteriza al nivel elite?', 
-          options: ['Velocidad', 'Control total y precisión máxima'], 
-          answer: 1
-        }
-      },
-      {
-        id: 'e-eje2', 
-        title: 'Eje 2 - Intensidad y Resistencia', 
-        videos: [
-          { title: 'Entrenamiento intensivo', url: 'https://www.youtube.com/embed/nolkPq64TrY' }
-        ], 
-        quiz: {
-          q: '¿Cómo se aumenta la intensidad?', 
-          options: ['Solo con más peso', 'Con control, tiempo bajo tensión y complejidad'], 
-          answer: 1
-        }
-      },
-      {
-        id: 'e-eje3', 
-        title: 'Eje 3 - Maestría y Perfección', 
-        videos: [
-          { title: 'Perfeccionamiento técnico', url: 'https://www.youtube.com/embed/nolkPq64TrY' }
-        ], 
-        quiz: {
-          q: '¿Qué define a un practicante elite?',
-          options: ['Hacer muchos ejercicios', 'Dominio técnico y conexión mente-cuerpo perfecta'],
-          answer: 1
-        }
-      }
+/* =================================================
+   Datos demo (estructura) - puedes ampliarlos fácilmente
+   ================================================= */
+const demoMembership = [
+  {
+    id:'membresia-2025',
+    title:'Membresía Martes y Jueves',
+    price:99,
+    zoom:[ // Enlaces de ejemplo, reemplazar por los tuyos
+      {label:'Martes 19:00', url:'https://zoom.us/mi-clase1'},
+      {label:'Jueves 19:00', url:'https://zoom.us/mi-clase2'}
+    ],
+    videos:[ // Videos que aparecerán en la vista previa y en el modal al pagar
+      { title:'Clase grabada 1', url:'https://www.youtube.com/embed/nolkPq64TrY', thumb:'https://img.youtube.com/vi/nolkPq64TrY/hqdefault.jpg' },
+      { title:'Clase grabada 2', url:'https://www.youtube.com/embed/nolkPq64TrY', thumb:'https://img.youtube.com/vi/nolkPq64TrY/hqdefault.jpg' }
     ]
   }
+];
+
+const demoCourses = [
+  { id:'basic', title:'Nivel Inicial', description:'Aprende desde cero', price:49, ejes:[
+      {id:'b-eje1', title:'Eje 1 - Fundamentos', videos:[{title:'Video 1', url:'https://www.youtube.com/embed/nolkPq64TrY'}], quiz:{q:'Pregunta 1: ¿Cuál es la respuesta?', options:['A','B','C','D','E'], answer:0}},
+      {id:'b-eje2', title:'Eje 2 - Postura', videos:[{title:'Video 2', url:'https://www.youtube.com/embed/nolkPq64TrY'}], quiz:{q:'Pregunta 2: ¿Cuál es la respuesta?', options:['A','B','C'], answer:1}},
+      {id:'b-eje3', title:'Eje 3 - Flujo', videos:[{title:'Video 3', url:'https://www.youtube.com/embed/nolkPq64TrY'}], quiz:{q:'Pregunta 3: ¿Cuál es la respuesta?', options:['A','B','C'], answer:2}},
+  ]},
+  { id:'intermedio', title:'Nivel Intermedio', description:'Siguiente nivel', price:59, ejes:[
+      {id:'i-eje1', title:'Eje 1 - Fuerza', videos:[{title:'Video A', url:'https://www.youtube.com/embed/nolkPq64TrY'}], quiz:{q:'Pregunta A', options:['A','B'], answer:0}},
+      {id:'i-eje2', title:'Eje 2 - Control', videos:[{title:'Video B', url:'https://www.youtube.com/embed/nolkPq64TrY'}], quiz:{q:'Pregunta B', options:['A','B'], answer:0}},
+      {id:'i-eje3', title:'Eje 3 - Resistencia', videos:[{title:'Video C', url:'https://www.youtube.com/embed/nolkPq64TrY'}], quiz:{q:'Pregunta C', options:['A','B'], answer:1}},
+  ] },
+  { id:'elite', title:'Nivel Elite', description:'Para expertos', price:79, ejes:[
+      {id:'e-eje1', title:'Eje 1 - Avanzado', videos:[{title:'Video X', url:'https://www.youtube.com/embed/nolkPq64TrY'}], quiz:{q:'Pregunta X', options:['A','B'], answer:0}},
+      {id:'e-eje2', title:'Eje 2 - Intensidad', videos:[{title:'Video Y', url:'https://www.youtube.com/embed/nolkPq64TrY'}], quiz:{q:'Pregunta Y', options:['A','B'], answer:0}},
+      {id:'e-eje3', title:'Eje 3 - Maestría', videos:[{title:'Video Z', url:'https://www.youtube.com/embed/nolkPq64TrY'}], quiz:{q:'Pregunta Z', options:['A','B'], answer:1}},
+  ] }
 ];
 
 const demoWorkshops = [
-  { 
-    id: 'taller1', 
-    title: 'Taller: Respiración y Relajación', 
-    description: 'Aprendé técnicas de respiración para el bienestar',
-    price: 29, 
-    videos: [
-      { title: 'Técnicas de respiración', url: 'https://www.youtube.com/embed/nolkPq64TrY' }
-    ], 
-    quiz: {
-      q: '¿Cuál es el beneficio principal de la respiración consciente?', 
-      options: ['Quemar calorías', 'Reducir estrés y mejorar oxigenación'], 
-      answer: 1
-    }
-  },
-  { 
-    id: 'taller2', 
-    title: 'Taller: Pilates para la Espalda', 
-    description: 'Ejercicios específicos para fortalecer y cuidar tu espalda',
-    price: 35, 
-    videos: [
-      { title: 'Cuidado de la espalda', url: 'https://www.youtube.com/embed/nolkPq64TrY' }
-    ], 
-    quiz: {
-      q: '¿Qué ejercicio es mejor para la espalda baja?', 
-      options: ['Bird dog', 'Saltos', 'Peso muerto sin técnica'], 
-      answer: 0
-    }
-  }
+  { id:'taller1', title:'Taller Respiración', price:29, videos:[{title:'Taller Video', url:'https://www.youtube.com/embed/nolkPq64TrY'}], quiz:{q:'Pregunta', options:['A','B'], answer:0} }
 ];
 
+/* =========================
+   Elementos UI
+   ========================= */
 const coursesEl = document.getElementById('courses');
 const workshopsEl = document.getElementById('workshops');
+const membershipEl = document.getElementById('membership');
 const courseDetailEl = document.getElementById('course-detail');
 const heroBg = document.getElementById('hero-bg');
 const btnLoginOverlay = document.getElementById('btn-login-overlay');
@@ -476,227 +305,261 @@ const btnJoinZoom = document.getElementById('btn-join-zoom');
 let currentUser = null;
 let isDemo = false;
 
-async function createPreference(itemTitle, itemPrice, itemId) {
-  try {
+/* =========================
+   Mercado Pago (cliente)
+   =========================
+   - Tokens que nos diste. Recomendado: mover al backend en producción.
+   - MP_ACCESS_TOKEN se usa aquí para crear preferences desde cliente (NO RECOMENDADO PARA PRODUCCIÓN).
+*/
+const MP_ACCESS_TOKEN = 'APP_USR-9bd267a7-6de7-4597-942f-333b92a7df07';
+async function createPreference(itemTitle, itemPrice, itemId){
+  try{
     const resp = await fetch('https://api.mercadopago.com/checkout/preferences', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${MP_ACCESS_TOKEN}`,
-        'Content-Type': 'application/json'
+      method:'POST',
+      headers:{
+        'Authorization':`Bearer ${MP_ACCESS_TOKEN}`,
+        'Content-Type':'application/json'
       },
-      body: JSON.stringify({
-        items: [{
-          title: itemTitle,
-          quantity: 1,
-          currency_id: 'USD',
-          unit_price: Number(itemPrice)
-        }],
-        back_urls: {
-          success: window.location.href,
-          failure: window.location.href,
-          pending: window.location.href
-        },
-        auto_return: 'approved',
+      body:JSON.stringify({
+        items:[{title:itemTitle, quantity:1, currency_id:'USD', unit_price:Number(itemPrice)}],
+        back_urls:{success:window.location.href, failure:window.location.href, pending:window.location.href},
+        auto_return:'approved',
         external_reference: itemId
       })
     });
     const data = await resp.json();
     return data;
-  } catch (e) {
-    console.error('Error creando preferencia:', e);
+  } catch(e){
+    console.error('createPreference error', e);
     throw e;
   }
 }
 
-async function processPayment(itemId, price, title) {
-  if (!currentUser) {
-    alert("Debés iniciar sesión primero para realizar una compra.");
-    return;
-  }
-  
-  try {
+/* =========================
+   Pagos: iniciar proceso y guardar pending en Firestore
+   ========================= */
+async function processPayment(itemId, price, title){
+  if(!currentUser){ alert("Debés iniciar sesión primero."); return; }
+  try{
     const pref = await createPreference(title || itemId, price, itemId);
-    if (!pref || !pref.init_point) {
+    if(!pref || !pref.init_point){
       alert('No fue posible generar la preferencia de pago.');
       console.error(pref);
       return;
     }
-    
-    const pendingRef = doc(db, 'users', currentUser.uid, 'pendingPayments', pref.id);
-    await setDoc(pendingRef, {
-      itemId,
-      price,
-      title,
-      prefId: pref.id,
-      createdAt: new Date().toISOString()
-    });
+    // Guardar pending en Firestore
+    const pendingRef = doc(db, 'users', currentUser.uid, 'pendingPayments', pref.id || pref.preference_id || pref.id);
+    await setDoc(pendingRef, { itemId, price, title, prefId: pref.id || pref.preference_id, createdAt: new Date().toISOString() });
 
+    // Abrir checkout en nueva pestaña
     window.open(pref.init_point, '_blank');
-    alert('Se abrió Mercado Pago en una nueva pestaña. Completá el pago y volvé a esta página.');
-  } catch (e) {
+    alert('Se abrió Mercado Pago en una nueva pestaña. Completá el pago y volvé a la página.');
+  } catch(e){
     console.error(e);
     alert('Error al iniciar el pago: ' + (e.message || e));
   }
 }
 
-async function handleReturnFromMP() {
+/* =========================
+   Manejo retorno de Mercado Pago
+   ========================= */
+async function handleReturnFromMP(){
   const url = new URL(window.location.href);
-  const status = url.searchParams.get('collection_status') || url.searchParams.get('status');
-  const preference_id = url.searchParams.get('preference_id');
-  const collection_id = url.searchParams.get('collection_id') || url.searchParams.get('payment_id');
+  const cs = url.searchParams.get('collection_status') || url.searchParams.get('status') || null;
+  const preference_id = url.searchParams.get('preference_id') || url.searchParams.get('preference') || url.searchParams.get('preference_id');
+  const collection_id = url.searchParams.get('collection_id') || url.searchParams.get('payment_id') || null;
 
-  if (!preference_id || !status) return;
-  
-  if (status.toLowerCase() === 'approved') {
-    if (auth.currentUser) {
-      try {
+  if(!preference_id || !cs) return;
+  if(cs.toLowerCase() === 'approved'){
+    if(auth.currentUser){
+      try{
         const pendingRef = doc(db, 'users', auth.currentUser.uid, 'pendingPayments', preference_id);
         const pendingSnap = await getDoc(pendingRef);
-        
         let itemId = preference_id;
         let price = null;
         let title = null;
-        
-        if (pendingSnap.exists()) {
+        if(pendingSnap.exists()){
           const data = pendingSnap.data();
           itemId = data.itemId || preference_id;
           price = data.price || null;
           title = data.title || null;
         }
-        
+        // Guardar compra definitiva
         const purchaseRef = doc(db, 'users', auth.currentUser.uid, 'purchases', itemId);
-        await setDoc(purchaseRef, {
-          paid: true,
-          prefId: preference_id,
-          collection_id: collection_id,
-          timestamp: new Date().toISOString(),
-          price,
-          title
-        });
-        
-        if (pendingSnap.exists()) {
-          await updateDoc(pendingRef, {
-            reconciled: true,
-            reconciledAt: new Date().toISOString()
-          });
+        await setDoc(purchaseRef, { paid:true, prefId: preference_id, collection_id: collection_id, timestamp: new Date().toISOString(), price, title });
+        // Marcar pending reconciliado
+        if(pendingSnap.exists()){
+          await setDoc(pendingRef, { ...(pendingSnap.data()), reconciled: true, reconciledAt: new Date().toISOString() }, { merge: true });
         }
-        
-        alert('¡Pago confirmado! Gracias por tu compra. Tu acceso ha sido habilitado.');
-        
-        await renderMembership();
-        await renderCourses();
-        await renderWorkshops();
-        updateZoomButtonVisibility();
-        
+        alert('Pago confirmado. Gracias! Tu acceso ha sido habilitado.');
+        // Actualizar UI
+        await renderMembership(); await renderCourses(); await renderWorkshops(); updateZoomButtonVisibility();
+        // limpiamos params
         url.searchParams.delete('collection_status');
-        url.searchParams.delete('status');
         url.searchParams.delete('preference_id');
         url.searchParams.delete('collection_id');
-        url.searchParams.delete('payment_id');
         history.replaceState({}, document.title, url.pathname);
-      } catch (e) {
-        console.error('Error reconciliando pago:', e);
+      } catch(e){
+        console.error('Error al reconciliar pago:', e);
       }
     } else {
-      alert('Pago aprobado pero no estás logueado. Iniciá sesión para que el sistema registre tu pago.');
+      alert('Pago aprobado pero no estás logueado. Iniciá sesión para que el sistema registre tu pago automáticamente.');
     }
   }
 }
 
-async function hasPaid(userId, itemId) {
-  if (!userId) return false;
-  const docRef = doc(db, 'users', userId, 'purchases', itemId);
+/* =========================
+   Firestore helpers
+   ========================= */
+async function hasPaid(userId, itemId){
+  if(!userId) return false;
+  const docRef = doc(db,'users',userId,'purchases',itemId);
   const docSnap = await getDoc(docRef);
   return docSnap.exists() && docSnap.data().paid;
 }
 
-async function getUserProgress(userId, courseId) {
-  if (!userId) return { approvedEjes: [] };
+async function getUserProgress(userId, courseId){
+  if(!userId) return { approvedEjes: [] };
   const ref = doc(db, 'users', userId, 'progress', courseId);
   const snap = await getDoc(ref);
-  if (!snap.exists()) return { approvedEjes: [] };
+  if(!snap.exists()) return { approvedEjes: [] };
   return snap.data();
 }
 
-async function markEjeApproved(userId, courseId, ejeId) {
-  if (!userId) return;
+async function markEjeApproved(userId, courseId, ejeId){
+  if(!userId) return;
   const ref = doc(db, 'users', userId, 'progress', courseId);
   try {
-    const snap = await getDoc(ref);
-    if (snap.exists()) {
-      await updateDoc(ref, {
-        approvedEjes: arrayUnion(ejeId),
-        updatedAt: serverTimestamp()
-      });
-    } else {
-      await setDoc(ref, {
-        approvedEjes: [ejeId],
-        updatedAt: serverTimestamp()
-      });
-    }
-  } catch (e) {
-    console.error('Error marcando eje aprobado:', e);
+    await updateDoc(ref, { approvedEjes: arrayUnion(ejeId), updatedAt: serverTimestamp() });
+  } catch(e){
+    await setDoc(ref, { approvedEjes: [ejeId], updatedAt: serverTimestamp() }, { merge: true });
   }
 }
 
-async function renderMembership() {
-  const m = demoMembership[0];
-  const paid = currentUser ? await hasPaid(currentUser.uid, m.id) : false;
-  
-  document.getElementById('membership-price').innerText = m.price;
-  
-  if (btnPayMembership) {
-    btnPayMembership.disabled = paid;
-    btnPayMembership.innerText = paid ? '✓ Suscripción activa' : 'Pagar Membresía';
-    btnPayMembership.onclick = async () => {
-      if (!currentUser) {
-        alert('Iniciá sesión para comprar la membresía.');
-        return;
-      }
+/* =========================
+   Render Membership
+   ========================= */
+async function renderMembership(){
+  membershipEl.innerHTML = '';
+  for(const m of demoMembership){
+    const container = document.createElement('div'); container.className='p-4 bg-white rounded shadow-sm flex flex-col relative';
+    container.style.minWidth = '320px';
+    const paid = currentUser ? await hasPaid(currentUser.uid, m.id) : false;
+    const titleEl = document.createElement('h4'); titleEl.className='font-semibold text-[var(--accent-3)]'; titleEl.innerText = m.title;
+    const priceEl = document.createElement('p'); priceEl.className = 'mt-1 font-semibold text-[var(--accent-3)]'; priceEl.innerText = `USD ${m.price}`;
+    container.appendChild(titleEl); container.appendChild(priceEl);
+
+    // Botones
+    const btnWrapper = document.createElement('div'); btnWrapper.className='flex gap-2 mt-3';
+    const payBtn = document.createElement('button'); payBtn.className='btn-accent px-3 py-1 rounded'; payBtn.innerText = paid ? 'Suscripción activa' : 'Pagar Membresía';
+    payBtn.disabled = !!paid;
+    payBtn.onclick = async ()=> {
+      if(!currentUser){ alert('Iniciá sesión para comprar la membresía.'); return; }
       await processPayment(m.id, m.price, m.title);
     };
+    const openBtn = document.createElement('button'); openBtn.className='px-3 py-1 rounded border text-[var(--accent-2)]'; openBtn.innerText = 'Abrir';
+    openBtn.onclick = ()=> {
+      if(!paid && !isDemo){ alert('Solo disponible para miembros que pagaron.'); return; }
+      openMembershipModal(m, paid);
+    };
+    btnWrapper.appendChild(payBtn); btnWrapper.appendChild(openBtn);
+    container.appendChild(btnWrapper);
+
+    // Zoom links
+    const zoomContainer = document.createElement('div'); zoomContainer.className='mt-3 flex flex-wrap gap-2';
+    m.zoom.forEach((z)=> {
+      const a = document.createElement('a'); a.className='px-3 py-1 rounded border text-white/90'; a.innerText = z.label;
+      a.href = z.url; a.target = '_blank';
+      if(!paid){ a.addEventListener('click', (ev)=>{ ev.preventDefault(); alert('Solo disponible para personas que hayan pagado la membresía.'); }); a.classList.add('locked'); }
+      zoomContainer.appendChild(a);
+    });
+    container.appendChild(zoomContainer);
+
+    // Agregamos al DOM
+    membershipEl.appendChild(container);
+
+    // Preparamos preview thumbnails (si se despliega)
+    // (previewGrid se llenará con los videos del primer membership)
+    // Solo llenamos una vez, cuando se renderiza
   }
-  
+
+  // Si se está mostrando la preview ya (por ejemplo demo), refrescamos thumbs
+  if(membershipPreviewEl.style.display !== 'none'){
+    populatePreviewGrid();
+  }
+
   updateZoomButtonVisibility();
 }
 
-function populatePreviewGrid() {
+/* Rellena la cuadrícula de miniaturas para la vista previa */
+function populatePreviewGrid(){
   previewGrid.innerHTML = '';
   const m = demoMembership[0];
-  
   m.videos.forEach((v, idx) => {
-    const thumb = document.createElement('div');
-    thumb.className = 'preview-thumb';
-    
-    const img = document.createElement('img');
-    img.src = v.thumb || 'https://img.youtube.com/vi/nolkPq64TrY/hqdefault.jpg';
-    
-    const meta = document.createElement('div');
-    meta.className = 'meta';
+    const thumb = document.createElement('div'); thumb.className='preview-thumb';
+    const img = document.createElement('img'); img.src = v.thumb || ('https://img.youtube.com/vi/' + extractYouTubeId(v.url) + '/hqdefault.jpg');
+    const meta = document.createElement('div'); meta.className='meta';
     meta.innerText = v.title;
-    
-    const play = document.createElement('div');
-    play.className = 'preview-play';
+    const play = document.createElement('div'); play.className='preview-play';
     play.innerHTML = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M5 3v18l15-9L5 3z" fill="rgba(255,255,255,0.9)"/></svg>';
-    
-    thumb.appendChild(img);
-    thumb.appendChild(play);
-    thumb.appendChild(meta);
-    
+    thumb.appendChild(img); thumb.appendChild(play); thumb.appendChild(meta);
+    // click behavior: si está pagado => abrir video; si demo o no pagado => alert / mostrar modal con overlay
     thumb.onclick = async () => {
-      const paid = currentUser ? await hasPaid(currentUser.uid, m.id) : false;
-      if (paid && !isDemo) {
+      const paid = currentUser ? await hasPaid(currentUser.uid, demoMembership[0].id) : false;
+      if(paid && !isDemo){
         openVideoModal(v.url, v.title);
       } else {
+        // Modo demo o no pagado: mostrar preview modal con mensaje
         openPreviewModal(v, paid);
       }
     };
-    
     previewGrid.appendChild(thumb);
   });
 }
 
-function openVideoModal(src, title) {
+/* Extrae ID simple de YouTube de una URL embed o watch */
+function extractYouTubeId(url){
+  try{
+    const u = new URL(url.replace('/embed/', '/watch?v=')); // normalize
+    return u.searchParams.get('v') || url.split('/').pop();
+  } catch(e){
+    return url.split('/').pop();
+  }
+}
+
+/* Abre modal con videos de membresía */
+function openMembershipModal(membership, paid){
+  const root = document.getElementById('modal-root');
+  root.style.display = 'block';
+  root.innerHTML = `
+    <div class="modal-backdrop" id="modal-backdrop">
+      <div class="modal p-4">
+        <div class="flex justify-between items-center mb-3">
+          <h3 class="text-xl font-bold">${membership.title}</h3>
+          <button id="modal-close" class="px-3 py-1 rounded border">Cerrar</button>
+        </div>
+        <p class="text-sm text-gray-600 mb-3">Clases grabadas y enlaces a las sesiones en vivo (Martes y Jueves).</p>
+        <div id="modal-videos" class="space-y-3"></div>
+      </div>
+    </div>
+  `;
+  document.getElementById('modal-close').onclick = ()=> { root.style.display='none'; root.innerHTML=''; };
+  const videosDiv = document.getElementById('modal-videos');
+  membership.videos.forEach(v=>{
+    const card = document.createElement('div'); card.className='border rounded p-2 relative';
+    const title = document.createElement('div'); title.className='font-semibold'; title.innerText = v.title;
+    const btnView = document.createElement('button'); btnView.className='mt-2 btn-accent px-3 py-1 rounded'; btnView.innerText = 'Ver video';
+    btnView.onclick = ()=> {
+      if(!paid && !isDemo){ alert('Pagá la membresía para ver el video completo.'); return; }
+      if(isDemo && !paid){ alert('Modo demo: vista previa limitada. Registrate y paga para acceder al contenido completo.'); return; }
+      openVideoModal(v.url, v.title);
+    };
+    card.appendChild(title); card.appendChild(btnView); videosDiv.appendChild(card);
+  });
+}
+
+/* Abre modal para reproducir video (iframe) */
+function openVideoModal(src, title){
   const root = document.getElementById('modal-root');
   root.style.display = 'block';
   root.innerHTML = `
@@ -704,7 +567,7 @@ function openVideoModal(src, title) {
       <div class="modal p-4">
         <div class="flex justify-between items-center mb-3">
           <h3 class="text-xl font-bold">${title}</h3>
-          <button id="video-modal-close" class="px-3 py-1 rounded border hover:bg-gray-100">Cerrar</button>
+          <button id="video-modal-close" class="px-3 py-1 rounded border">Cerrar</button>
         </div>
         <div style="position:relative;padding-top:56.25%;">
           <iframe src="${src}?rel=0&controls=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen></iframe>
@@ -712,13 +575,11 @@ function openVideoModal(src, title) {
       </div>
     </div>
   `;
-  document.getElementById('video-modal-close').onclick = () => {
-    root.style.display = 'none';
-    root.innerHTML = '';
-  };
+  document.getElementById('video-modal-close').onclick = ()=> { root.style.display='none'; root.innerHTML=''; };
 }
 
-function openPreviewModal(video, paid) {
+/* Modal de preview (demo / no pagado) */
+function openPreviewModal(video, paid){
   const root = document.getElementById('modal-root');
   root.style.display = 'block';
   root.innerHTML = `
@@ -726,491 +587,310 @@ function openPreviewModal(video, paid) {
       <div class="modal p-4">
         <div class="flex justify-between items-center mb-3">
           <h3 class="text-xl font-bold">Preview: ${video.title}</h3>
-          <button id="preview-modal-close" class="px-3 py-1 rounded border hover:bg-gray-100">Cerrar</button>
+          <button id="preview-modal-close" class="px-3 py-1 rounded border">Cerrar</button>
         </div>
-        <p class="text-sm text-gray-600 mb-3">Estás viendo una vista previa. Para ver el video completo, registrate y pagá la membresía.</p>
+        <p class="text-sm text-gray-600 mb-3">Estás viendo una vista previa. Para ver el video completo registrate y pagá la membresía.</p>
         <div style="position:relative;padding-top:56.25%;">
-          <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;color:white;font-size:18px;text-align:center;padding:20px;">
-            🔒 Video bloqueado<br><small>Registrate y pagá para ver el contenido completo</small>
-          </div>
+          <iframe src="${video.url}?controls=1&rel=0" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0; opacity:0.9; pointer-events:none;" allowfullscreen></iframe>
         </div>
         <div class="mt-3 flex gap-2">
           <button id="preview-cta-pay" class="btn-accent px-3 py-1 rounded">Pagar membresía</button>
-          <button id="preview-cta-register" class="px-3 py-1 rounded border hover:bg-gray-100">Iniciar sesión / Registrar</button>
+          <button id="preview-cta-register" class="px-3 py-1 rounded border">Iniciar sesión / Registrar</button>
         </div>
       </div>
     </div>
   `;
-  document.getElementById('preview-modal-close').onclick = () => {
-    root.style.display = 'none';
-    root.innerHTML = '';
-  };
+  document.getElementById('preview-modal-close').onclick = ()=> { root.style.display='none'; root.innerHTML=''; };
   document.getElementById('preview-cta-pay').onclick = async () => {
-    if (!currentUser) {
-      alert('Iniciá sesión para comprar la membresía.');
-      return;
-    }
+    if(!currentUser){ alert('Iniciá sesión para comprar la membresía.'); return; }
     await processPayment(demoMembership[0].id, demoMembership[0].price, demoMembership[0].title);
   };
   document.getElementById('preview-cta-register').onclick = () => login();
 }
 
-async function renderCourses() {
-  coursesEl.innerHTML = '';
-  courseDetailEl.innerHTML = '';
-  courseDetailEl.classList.add('hidden');
-  
-  for (const c of demoCourses) {
-    const card = document.createElement('div');
-    card.className = 'p-4 bg-white rounded shadow-sm flex flex-col hover:shadow-md transition-shadow';
-    
-    card.innerHTML = `
-      <h4 class="font-semibold text-[var(--accent-3)] text-lg">${c.title}</h4>
-      <p class="text-sm text-gray-500 mt-1">${c.description}</p>
-      <p class="mt-2 font-bold text-[var(--accent)] text-xl">USD ${c.price}</p>
-    `;
-    
-    const btn = document.createElement('button');
-    btn.className = 'btn-accent px-3 py-2 rounded mt-3 font-semibold';
-    btn.innerText = 'Ver curso';
-    btn.onclick = () => showCourseDetail(c);
+/* =========================
+   Render Cursos (lista)
+   ========================= */
+async function renderCourses(){
+  coursesEl.innerHTML=''; courseDetailEl.innerHTML=''; courseDetailEl.classList.add('hidden');
+  for(const c of demoCourses){
+    const card = document.createElement('div'); card.className='p-4 bg-white rounded shadow-sm flex flex-col';
+    card.innerHTML=`<h4 class="font-semibold text-[var(--accent-3)]">${c.title}</h4>
+                    <p class="text-sm text-gray-500">${c.description}</p>
+                    <p class="mt-2 font-semibold text-[var(--accent)]">USD ${c.price}</p>`;
+    const btn = document.createElement('button'); btn.className='btn-accent px-3 py-1 rounded mt-2'; btn.innerText='Entrar al curso';
+    btn.onclick=()=>showCourseDetail(c);
     card.appendChild(btn);
-    
-    const status = document.createElement('div');
-    status.className = 'text-sm mt-2';
-    if (currentUser) {
+
+    // Indicar si está comprado
+    const status = document.createElement('div'); status.className='text-sm mt-2';
+    if(currentUser){
       hasPaid(currentUser.uid, c.id).then(p => {
-        if (p) {
-          status.innerHTML = '<span class="success-badge">✓ Comprado</span>';
-        } else {
-          status.innerHTML = '<span class="text-gray-600">Pago requerido</span>';
-        }
+        status.innerText = p ? 'Comprado' : 'Pago requerido';
+        status.style.color = p ? 'green' : '';
       });
     } else {
       status.innerText = 'Iniciá sesión para comprar';
-      status.className = 'text-sm mt-2 text-gray-500';
     }
     card.appendChild(status);
-    
+
     coursesEl.appendChild(card);
   }
 }
 
-async function showCourseDetail(course) {
-  courseDetailEl.innerHTML = '';
-  courseDetailEl.classList.remove('hidden');
-  
-  const backBtn = document.createElement('button');
-  backBtn.className = 'btn-accent px-3 py-2 rounded mb-4';
-  backBtn.innerText = '← Volver a cursos';
-  backBtn.onclick = () => {
-    courseDetailEl.classList.add('hidden');
-    coursesEl.scrollIntoView({ behavior: 'smooth' });
-  };
+/* =========================
+   Mostrar detalle del curso con ejes, videos y examen.
+*/
+async function showCourseDetail(course){
+  courseDetailEl.innerHTML=''; courseDetailEl.classList.remove('hidden');
+  const backBtn = document.createElement('button'); backBtn.className='btn-accent px-3 py-1 rounded mb-4'; backBtn.innerText='Volver a cursos';
+  backBtn.onclick=()=>{ courseDetailEl.classList.add('hidden'); coursesEl.scrollIntoView({behavior:"smooth"}); };
   courseDetailEl.appendChild(backBtn);
-  
-  const title = document.createElement('h4');
-  title.className = 'text-2xl font-bold text-[var(--accent-3)] mb-2';
-  title.innerText = course.title;
+
+  const title = document.createElement('h4'); title.className='text-2xl font-bold text-[var(--accent-3)] mb-4'; title.innerText=course.title;
   courseDetailEl.appendChild(title);
-  
-  const desc = document.createElement('p');
-  desc.className = 'text-gray-600 mb-4';
-  desc.innerText = course.description;
-  courseDetailEl.appendChild(desc);
-  
+
   const paid = currentUser ? await hasPaid(currentUser.uid, course.id) : false;
-  
-  if (!paid) {
-    const payBtn = document.createElement('button');
-    payBtn.className = 'btn-accent px-4 py-2 rounded mb-4 font-semibold';
-    payBtn.innerText = `Comprar curso - USD ${course.price}`;
-    payBtn.onclick = async () => {
-      if (!currentUser) {
-        alert('Iniciá sesión para comprar el curso.');
-        return;
-      }
+  if(!paid){
+    const payBtn = document.createElement('button'); payBtn.className='btn-accent px-3 py-1 rounded mb-4'; payBtn.innerText = `Pagar curso USD ${course.price}`;
+    payBtn.onclick = async ()=> {
+      if(!currentUser){ alert('Iniciá sesión para comprar el curso.'); return; }
       await processPayment(course.id, course.price, course.title);
     };
     courseDetailEl.appendChild(payBtn);
-    
-    if (isDemo) {
-      const d = document.createElement('p');
-      d.className = 'text-sm text-gray-600 mb-4 bg-yellow-50 p-3 rounded border border-yellow-200';
-      d.innerText = '⚠️ Modo demo: no podés acceder al contenido. Registrate y pagá para desbloquear.';
+    if(isDemo){
+      const d = document.createElement('p'); d.className='text-sm text-gray-600 mb-4'; d.innerText = 'Modo demo: no se puede acceder al contenido. Registrate y paga para desbloquear.';
       courseDetailEl.appendChild(d);
     }
-  } else {
-    const paidBadge = document.createElement('div');
-    paidBadge.className = 'mb-4';
-    paidBadge.innerHTML = '<span class="success-badge">✓ Curso comprado</span>';
-    courseDetailEl.appendChild(paidBadge);
   }
-  
+
   const progress = currentUser ? await getUserProgress(currentUser.uid, course.id) : { approvedEjes: [] };
   const approvedSet = new Set(progress.approvedEjes || []);
-  
-  for (let i = 0; i < course.ejes.length; i++) {
+
+  for(let i = 0; i < course.ejes.length; i++){
     const eje = course.ejes[i];
-    const ejeCard = document.createElement('div');
-    ejeCard.className = 'border rounded-lg p-4 mb-3 relative bg-white shadow-sm';
-    
-    const header = document.createElement('div');
-    header.className = 'accordion-header font-semibold text-lg flex justify-between items-center';
-    header.innerHTML = `
-      <span>${eje.title}</span>
-      <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-      </svg>
-    `;
-    
-    const content = document.createElement('div');
-    content.className = 'mt-3 hidden';
-    
-    header.onclick = () => {
-      content.classList.toggle('hidden');
-      header.querySelector('svg').classList.toggle('rotate-180');
-    };
-    
+    const ejeCard = document.createElement('div'); ejeCard.className='border rounded p-4 mb-2 relative';
+    const header = document.createElement('div'); header.className='accordion-header font-semibold'; header.innerText=eje.title;
+    const content = document.createElement('div'); content.className='mt-2 hidden';
+    header.onclick=()=> content.classList.toggle('hidden');
+
+    // Determinar desbloqueo
     let unlocked = false;
-    if (!paid) {
-      unlocked = false;
-    } else {
-      if (i === 0) {
-        unlocked = true;
-      } else {
-        const prev = course.ejes[i - 1];
+    if(!paid) unlocked = false;
+    else {
+      if(i === 0) unlocked = true;
+      else {
+        const prev = course.ejes[i-1];
         unlocked = approvedSet.has(prev.id);
       }
     }
-    
-    for (const v of eje.videos) {
-      const videoContainer = document.createElement('div');
-      videoContainer.className = 'video-container my-3 rounded overflow-hidden';
-      
-      const iframe = document.createElement('iframe');
-      iframe.src = v.url + '?controls=1&rel=0';
-      iframe.width = '100%';
-      iframe.height = 240;
-      iframe.style.border = 'none';
-      
-      if (!unlocked || isDemo) {
-        iframe.style.opacity = '0.4';
-        iframe.style.pointerEvents = 'none';
-        
-        const overlay = document.createElement('div');
-        overlay.className = 'video-overlay';
-        overlay.innerHTML = `
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13v6l5.25 3.15.75-1.23-4.5-2.67V7H11z" fill="white"/>
-          </svg>
-          <span>${isDemo ? '🔒 Demo - Registrate para ver' : (!paid ? '🔒 Pagá el curso' : '🔒 Aprobá el eje anterior')}</span>
-        `;
-        overlay.onclick = () => {
-          if (isDemo) {
-            alert('Modo demo: registrate y pagá para desbloquear este contenido.');
-          } else if (!paid) {
-            alert('Debés pagar el curso para acceder a los videos.');
-          } else {
-            alert('Aprobá el examen del eje anterior para desbloquear este contenido.');
-          }
+
+    // Videos
+    for(const v of eje.videos){
+      const container=document.createElement('div'); container.className='video-container my-2';
+      const iframe=document.createElement('iframe'); iframe.src=v.url + '&controls=1'; iframe.width='100%'; iframe.height=180;
+
+      if(!unlocked || isDemo){
+        iframe.style.opacity='0.6'; iframe.style.pointerEvents='none';
+        const overlay = document.createElement('div'); overlay.className='video-overlay';
+        overlay.innerText = isDemo ? 'Demo - registrate para ver' : (!unlocked ? 'Aprobá el eje anterior para desbloquear' : 'Contenido bloqueado');
+        overlay.onclick = ()=> {
+          if(isDemo) alert('Modo demo: registrate y paga para desbloquear este contenido.');
+          else if(!paid) alert('Debés pagar el curso para acceder a los videos.');
+          else alert('Aprobá el eje anterior para desbloquear este contenido.');
         };
-        videoContainer.appendChild(iframe);
-        videoContainer.appendChild(overlay);
+        container.appendChild(iframe); container.appendChild(overlay);
       } else {
-        const playBtn = document.createElement('button');
-        playBtn.className = 'mt-2 btn-accent px-3 py-1 rounded text-sm';
-        playBtn.innerText = 'Abrir video en grande';
+        const playBtn = document.createElement('button'); playBtn.className='mt-2 btn-accent px-3 py-1 rounded'; playBtn.innerText = 'Abrir video';
         playBtn.onclick = () => openVideoModal(v.url, v.title);
-        videoContainer.appendChild(iframe);
-        videoContainer.appendChild(playBtn);
+        container.appendChild(iframe); container.appendChild(playBtn);
       }
-      
-      content.appendChild(videoContainer);
+      content.appendChild(container);
     }
-    
-    const quizContainer = document.createElement('div');
-    quizContainer.className = 'mt-4 p-3 bg-gray-50 rounded border';
-    
-    const qTitle = document.createElement('h5');
-    qTitle.className = 'font-semibold mb-2';
-    qTitle.innerText = '📝 Examen del eje';
-    quizContainer.appendChild(qTitle);
-    
-    const qText = document.createElement('p');
-    qText.className = 'font-medium mb-2';
-    qText.innerText = eje.quiz.q;
-    quizContainer.appendChild(qText);
-    
-    eje.quiz.options.forEach((opt, iopt) => {
-      const btn = document.createElement('button');
-      btn.className = 'block w-full text-left border rounded p-2 my-1 hover:bg-white transition';
-      btn.innerText = opt;
-      btn.onclick = async () => {
-        if (!unlocked) {
+
+    // Quiz
+    const quizContainer = document.createElement('div'); quizContainer.className='mt-2';
+    const qEl = document.createElement('div'); qEl.innerHTML=`<p class="font-medium mb-2">${eje.quiz.q}</p>`;
+    eje.quiz.options.forEach((opt,iopt)=>{
+      const btn=document.createElement('button'); btn.className='block w-full text-left border rounded p-2 my-1'; btn.innerText=opt;
+      btn.onclick=async ()=> {
+        if(!unlocked){
           alert('No podés rendir este examen hasta desbloquear el eje.');
           return;
         }
-        if (isDemo) {
-          alert('Modo demo: no se guardan avances. Registrate y pagá para aprobar el eje.');
+        if(isDemo){
+          alert('Modo demo: no se guardan avances. Registrate y paga para aprobar el eje.');
           return;
         }
-        if (!currentUser) {
+        if(!currentUser){
           alert('Iniciá sesión para guardar tu progreso.');
           return;
         }
-        if (iopt === eje.quiz.answer) {
-          alert('✓ ¡Correcto! Eje aprobado.');
+        if(iopt === eje.quiz.answer){
+          alert('Correcto! Eje aprobado.');
           await markEjeApproved(currentUser.uid, course.id, eje.id);
-          showCourseDetail(course);
+          showCourseDetail(course); // refrescar
         } else {
-          alert('✗ Incorrecto. Probá de nuevo.');
+          alert('Incorrecto. Probá de nuevo.');
         }
       };
-      quizContainer.appendChild(btn);
+      qEl.appendChild(btn);
     });
-    
+    quizContainer.appendChild(qEl);
     content.appendChild(quizContainer);
-    
-    if (!unlocked) {
-      const lockBadge = document.createElement('div');
-      lockBadge.className = 'lock-badge';
-      lockBadge.innerText = '🔒 Bloqueado';
+
+    // Badges
+    if(!unlocked){
+      const lockBadge = document.createElement('div'); lockBadge.className='lock-badge'; lockBadge.innerText = 'Bloqueado';
       ejeCard.appendChild(lockBadge);
-    } else if (approvedSet.has(eje.id)) {
-      const okBadge = document.createElement('div');
-      okBadge.className = 'lock-badge success-badge';
-      okBadge.innerText = '✓ Aprobado';
-      ejeCard.appendChild(okBadge);
+    } else {
+      if(approvedSet.has(eje.id)){
+        const ok = document.createElement('div'); ok.className='lock-badge'; ok.innerText = 'Aprobado';
+        ejeCard.appendChild(ok);
+      }
     }
-    
-    ejeCard.appendChild(header);
-    ejeCard.appendChild(content);
-    courseDetailEl.appendChild(ejeCard);
+
+    ejeCard.appendChild(header); ejeCard.appendChild(content); courseDetailEl.appendChild(ejeCard);
   }
 }
 
-async function renderWorkshops() {
-  workshopsEl.innerHTML = '';
-  
-  for (const w of demoWorkshops) {
-    const card = document.createElement('div');
-    card.className = 'p-4 bg-white rounded shadow-sm flex flex-col hover:shadow-md transition-shadow';
-    
-    card.innerHTML = `
-      <h4 class="font-semibold text-[var(--accent)] text-lg">${w.title}</h4>
-      <p class="text-sm text-gray-500 mt-1">${w.description}</p>
-      <p class="mt-2 font-bold text-[var(--accent)] text-xl">USD ${w.price}</p>
-    `;
-    
-    const btnPay = document.createElement('button');
-    btnPay.className = 'btn-accent px-3 py-2 rounded mt-3 font-semibold';
-    btnPay.innerText = 'Comprar Taller';
-    btnPay.onclick = () => processPayment(w.id, w.price, w.title);
+/* =========================
+   Render Talleres
+   ========================= */
+async function renderWorkshops(){
+  workshopsEl.innerHTML='';
+  for(const w of demoWorkshops){
+    const card=document.createElement('div'); card.className='p-4 bg-white rounded shadow-sm flex flex-col';
+    card.innerHTML=`<h4 class="font-semibold text-[var(--accent)]">${w.title}</h4>
+                    <p class="mt-1 font-semibold text-[var(--accent)]">USD ${w.price}</p>`;
+    const btnPay=document.createElement('button'); btnPay.className='btn-accent px-3 py-1 rounded mt-2'; btnPay.innerText='Pagar Taller';
+    btnPay.onclick=()=>processPayment(w.id,w.price,w.title);
     card.appendChild(btnPay);
-    
-    const vcontainer = document.createElement('div');
-    vcontainer.className = 'mt-3 video-container rounded overflow-hidden';
-    
-    const iframe = document.createElement('iframe');
-    iframe.width = '100%';
-    iframe.height = 180;
-    iframe.src = w.videos[0].url + '?controls=1&rel=0';
-    iframe.style.border = 'none';
-    
+    // Video preview
+    const vcontainer = document.createElement('div'); vcontainer.className='mt-2 video-container';
+    const iframe=document.createElement('iframe'); iframe.width='100%'; iframe.height=180; iframe.src=w.videos[0].url+'&controls=1';
     const paid = currentUser ? await hasPaid(currentUser.uid, w.id) : false;
-    
-    if (!paid || isDemo) {
-      iframe.style.opacity = '0.4';
-      iframe.style.pointerEvents = 'none';
-      
-      const overlay = document.createElement('div');
-      overlay.className = 'video-overlay';
-      overlay.innerHTML = `
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-          <path d="M12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" fill="white"/>
-          <path d="M19 8h-1V6c0-2.76-2.24-5-5-5H11c-2.76 0-5 2.24-5 5v2H5c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM8 6c0-1.66 1.34-3 3-3h2c1.66 0 3 1.34 3 3v2H8V6zm11 14H5V10h14v10z" fill="white"/>
-        </svg>
-        <span>${isDemo ? '🔒 Demo - Registrate' : '🔒 Pago requerido'}</span>
-      `;
-      overlay.onclick = () => {
-        if (isDemo) {
-          alert('Modo demo: registrate y pagá para ver el taller.');
-        } else {
-          alert('Pagá el taller para ver el video completo.');
-        }
-      };
-      vcontainer.appendChild(iframe);
-      vcontainer.appendChild(overlay);
+    if(!paid || isDemo){
+      iframe.style.opacity='0.6'; iframe.style.pointerEvents='none';
+      const overlay = document.createElement('div'); overlay.className='video-overlay'; overlay.innerText = isDemo ? 'Demo - registrate' : 'Pago requerido para ver';
+      overlay.onclick = ()=> { if(isDemo) alert('Modo demo: registrate y paga para ver el taller.'); else alert('Pagá el taller para ver el video.'); };
+      vcontainer.appendChild(iframe); vcontainer.appendChild(overlay);
     } else {
       vcontainer.appendChild(iframe);
     }
-    
     card.appendChild(vcontainer);
+
     workshopsEl.appendChild(card);
   }
 }
 
-function showMainContent(user) {
+/* =========================
+   Show / ocultar main content
+   ========================= */
+function showMainContent(user){
   currentUser = user;
-  if (user) {
-    document.getElementById('main-content').classList.add('visible');
-    document.getElementById('login-wrapper').style.display = 'none';
-    isDemo = false;
-  } else {
-    document.getElementById('main-content').classList.remove('visible');
-    document.getElementById('login-wrapper').style.display = 'flex';
-    isDemo = false;
-  }
+  if(user){ document.getElementById('main-content').classList.add('visible'); document.getElementById('login-wrapper').style.display='none'; isDemo = false; }
+  else { document.getElementById('main-content').classList.remove('visible'); document.getElementById('login-wrapper').style.display='flex'; isDemo = false; }
 }
 
-async function login() {
-  try {
-    if (auth.currentUser) {
+/* =========================
+   Login (Google popup)
+   ========================= */
+async function login(){
+  try{
+    if(auth.currentUser) {
       await signOut(auth);
     } else {
       await signInWithPopup(auth, new GoogleAuthProvider());
     }
-  } catch (e) {
-    alert("Error al iniciar sesión: " + (e.message || e));
+  } catch(e){
+    alert("Error al iniciar sesión: "+ (e.message || e));
     console.error(e);
   }
 }
 
-async function updateZoomButtonVisibility() {
+/* =========================
+   Controles UI (event listeners)
+   ========================= */
+if(btnLoginOverlay) btnLoginOverlay.addEventListener('click', login);
+if(btnLoginNav) btnLoginNav.addEventListener('click', login);
+if(btnGuest) btnGuest.addEventListener('click', ()=>{ // demo
+  isDemo = true;
+  document.getElementById('login-wrapper').style.display='none';
+  document.getElementById('main-content').classList.add('visible');
+  renderMembership(); renderCourses(); renderWorkshops();
+  // show preview automatically in demo
+  membershipPreviewEl.style.display = 'block';
+  populatePreviewGrid();
+});
+if(btnMiniPay) btnMiniPay.addEventListener('click', ()=>processPayment('basic',49,'Nivel Inicial'));
+if(btnPayMembership) btnPayMembership.addEventListener('click', async ()=> {
   const m = demoMembership[0];
-  if (!btnJoinZoom) return;
-  
+  if(!currentUser){ alert('Iniciá sesión para comprar la membresía.'); return; }
+  await processPayment(m.id, m.price, m.title);
+});
+if(btnMembershipOpen) btnMembershipOpen.addEventListener('click', ()=> {
+  // togglea la vista previa inline (despliegue) y la rellena
+  if(membershipPreviewEl.style.display === 'none' || membershipPreviewEl.style.display === ''){
+    membershipPreviewEl.style.display = 'block';
+    populatePreviewGrid();
+  } else {
+    membershipPreviewEl.style.display = 'none';
+  }
+});
+
+/* Mostrar / ocultar y configurar boton "Unirse al vivo" */
+async function updateZoomButtonVisibility(){
+  const m = demoMembership[0];
+  if(!btnJoinZoom) return;
   const paid = currentUser ? await hasPaid(currentUser.uid, m.id) : false;
-  
-  if (paid && !isDemo) {
+  if(paid && !isDemo){
     btnJoinZoom.style.display = 'block';
     btnJoinZoom.onclick = () => {
-      const root = document.getElementById('modal-root');
-      root.style.display = 'block';
-      root.innerHTML = `
-        <div class="modal-backdrop">
-          <div class="modal p-4">
-            <div class="flex justify-between items-center mb-3">
-              <h3 class="text-xl font-bold">Clases en vivo por Zoom</h3>
-              <button id="zoom-modal-close" class="px-3 py-1 rounded border hover:bg-gray-100">Cerrar</button>
-            </div>
-            <p class="text-sm text-gray-600 mb-4">Seleccioná la clase a la que querés unirte:</p>
-            <div class="space-y-2">
-              ${m.zoom.map(z => `
-                <a href="${z.url}" target="_blank" class="block p-3 border rounded hover:bg-gray-50 transition">
-                  <strong>${z.label}</strong>
-                  <p class="text-xs text-gray-500 mt-1">Click para abrir Zoom</p>
-                </a>
-              `).join('')}
-            </div>
-          </div>
-        </div>
-      `;
-      document.getElementById('zoom-modal-close').onclick = () => {
-        root.style.display = 'none';
-        root.innerHTML = '';
-      };
+      // abrir primer zoom (puedes ajustar la lógica para elegir la clase correcta)
+      const z = m.zoom && m.zoom[0];
+      if(z && z.url) window.open(z.url, '_blank');
+      else alert('Enlace de Zoom no configurado.');
     };
   } else {
     btnJoinZoom.style.display = 'none';
   }
 }
 
-if (btnLoginOverlay) {
-  btnLoginOverlay.addEventListener('click', login);
-}
-
-if (btnLoginNav) {
-  btnLoginNav.addEventListener('click', login);
-}
-
-if (btnGuest) {
-  btnGuest.addEventListener('click', () => {
-    isDemo = true;
-    document.getElementById('login-wrapper').style.display = 'none';
-    document.getElementById('main-content').classList.add('visible');
-    renderMembership();
-    renderCourses();
-    renderWorkshops();
-    membershipPreviewEl.style.display = 'block';
-    populatePreviewGrid();
-  });
-}
-
-if (btnMiniPay) {
-  btnMiniPay.addEventListener('click', async () => {
-    if (!currentUser) {
-      alert('Iniciá sesión para comprar el curso.');
-      return;
-    }
-    await processPayment('basic', 49, 'Nivel Inicial');
-  });
-}
-
-if (btnPayMembership) {
-  btnPayMembership.addEventListener('click', async () => {
-    const m = demoMembership[0];
-    if (!currentUser) {
-      alert('Iniciá sesión para comprar la membresía.');
-      return;
-    }
-    await processPayment(m.id, m.price, m.title);
-  });
-}
-
-if (btnMembershipOpen) {
-  btnMembershipOpen.addEventListener('click', () => {
-    if (membershipPreviewEl.style.display === 'none' || membershipPreviewEl.style.display === '') {
-      membershipPreviewEl.style.display = 'block';
-      populatePreviewGrid();
-      btnMembershipOpen.innerText = 'Ocultar Clases';
-    } else {
-      membershipPreviewEl.style.display = 'none';
-      btnMembershipOpen.innerText = 'Ver Clases Grabadas';
-    }
-  });
-}
-
+/* =========================
+   Observador de auth
+   ========================= */
 onAuthStateChanged(auth, async (user) => {
-  if (user) {
+  if(user){
     currentUser = user;
-    if (btnLoginNav) {
-      btnLoginNav.innerText = `Salir (${user.displayName?.split(' ')[0] || 'Usuario'})`;
-    }
+    if(btnLoginNav) btnLoginNav.innerText = `Salir (${user.displayName || 'Mi cuenta'})`;
     isDemo = false;
-    
+    // Guardar o actualizar perfil básico en Firestore
     try {
       const userRef = doc(db, 'users', user.uid);
-      await setDoc(userRef, {
-        displayName: user.displayName || null,
-        email: user.email || null,
-        lastSeen: new Date().toISOString()
-      }, { merge: true });
-    } catch (e) {
-      console.error('Error guardando perfil:', e);
-    }
+      await setDoc(userRef, { displayName: user.displayName || null, email: user.email || null, lastSeen: new Date().toISOString() }, { merge: true });
+    } catch(e){ console.error('Error guardando perfil', e); }
   } else {
     currentUser = null;
-    if (btnLoginNav) {
-      btnLoginNav.innerText = 'Entrar / Registrarme';
-    }
+    if(btnLoginNav) btnLoginNav.innerText = 'Entrar / Registrarme';
   }
-  
+  // Renderizar todo dependiente de usuario
   await renderMembership();
   await renderCourses();
   await renderWorkshops();
   showMainContent(user);
   await updateZoomButtonVisibility();
+  // Intentar reconciliar retorno de MercadoPago tras login
   await handleReturnFromMP();
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => heroBg.classList.add('animate'), 600);
-  handleReturnFromMP().catch(e => console.error(e));
-  renderMembership();
-  renderCourses();
-  renderWorkshops();
+/* =========================
+   Detectar parámetros MP al cargar / animar hero
+   ========================= */
+document.addEventListener('DOMContentLoaded', ()=> {
+  setTimeout(()=> heroBg.classList.add('animate'),600);
+  handleReturnFromMP().catch(e=>console.error(e));
+  renderMembership(); renderCourses(); renderWorkshops();
 });
 
 </script>
